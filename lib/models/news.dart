@@ -1,16 +1,15 @@
-import 'package:equatable/equatable.dart';
-
-class News extends Equatable {
+class News {
   final String? title;
-  final List<String>? creators;
+  final List<dynamic>? creators;
   final String? description;
   final String? content;
   final String? publishedDate;
   final String? imageUrl;
-  final List<String>? countries;
-  final List<String>? categories;
+  final List<dynamic>? countries;
+  final List<dynamic>? categories;
   final String? fullDescription;
-  const News({
+  final bool? isSaved;
+  News({
     this.title,
     this.creators,
     this.description,
@@ -20,24 +19,22 @@ class News extends Equatable {
     this.countries,
     this.categories,
     this.fullDescription,
+    this.isSaved,
   });
 
-  factory News.fromJson(Map<String, dynamic> json) {
-    final results = json['results']; //multiple data
-    return News(
-      title: results['title'],
-      creators: results['creator'], //multiple data
-      description: results['description'],
-      content: results['content'],
-      publishedDate: results['pubDate'],
-      imageUrl: results['image_url'],
-      countries: results['country'], //multiple data
-      categories: results['category'], //multiple data
-      fullDescription: results['full_description'],
-    );
-  }
+  News.fromJson(Map<String, dynamic> json)
+      : title = json['title'] ?? 'No Author',
+        creators = json['creator'] ?? 'No Creator', //multiple data
+        description = json['description'] ?? 'No Description',
+        content = json['content'] ?? 'No Content',
+        publishedDate = json['pubDate'] ?? 'No Published Date',
+        imageUrl = json['image_url'] ?? 'No Image Url',
+        countries = json['country'] ?? 'No Country', //multiple data
+        categories = json['category'] ?? 'No Categories', //multiple data
+        fullDescription = json['full_description'] ?? 'No Full Description',
+        isSaved = false;
 
-  factory News.initial() => const News(
+  factory News.initial() => News(
         title: '',
         creators: [],
         description: '',
@@ -47,23 +44,6 @@ class News extends Equatable {
         countries: [],
         categories: [],
         fullDescription: '',
+        isSaved: false,
       );
-
-  @override
-  List<Object?> get props => [
-        title,
-        creators,
-        description,
-        content,
-        publishedDate,
-        imageUrl,
-        countries,
-        categories,
-        fullDescription,
-      ];
-
-  @override
-  String toString() {
-    return 'News(title: $title, creators: $creators, description: $description, content: $content, publishedDate: $publishedDate, imageUrl: $imageUrl, countries: $countries, categories: $categories, fullDescription: $fullDescription)';
-  }
 }

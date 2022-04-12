@@ -28,40 +28,38 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: _page,
-          height: 75.0,
-          items: const <Widget>[
-            FaIcon(FontAwesomeIcons.solidBookmark, size: 30),
-            FaIcon(FontAwesomeIcons.box, size: 30),
-            FaIcon(FontAwesomeIcons.houseChimneyUser, size: 30),
-            FaIcon(FontAwesomeIcons.bellConcierge, size: 30),
-            FaIcon(FontAwesomeIcons.userLarge, size: 30),
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        index: _page,
+        height: 75.0,
+        items: const <Widget>[
+          FaIcon(FontAwesomeIcons.solidBookmark, size: 30),
+          FaIcon(FontAwesomeIcons.box, size: 30),
+          FaIcon(FontAwesomeIcons.houseChimneyUser, size: 30),
+          FaIcon(FontAwesomeIcons.bellConcierge, size: 30),
+          FaIcon(FontAwesomeIcons.userLarge, size: 30),
+        ],
+        color: Colors.white,
+        buttonBackgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.white,
+        //animationCurve: Curves.easeInOut,
+        animationCurve: Curves.elasticOut,
+        animationDuration: const Duration(milliseconds: 600),
+        onTap: (index) {
+          setState(() {
+            _page = index;
+          });
+        },
+        letIndexChange: (index) => true,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _widgetOptions[_page],
           ],
-          color: Colors.white,
-          buttonBackgroundColor: Colors.white,
-          backgroundColor: Colors.blueAccent,
-          //animationCurve: Curves.easeInOut,
-          animationCurve: Curves.elasticOut,
-          animationDuration: const Duration(milliseconds: 600),
-          onTap: (index) {
-            setState(() {
-              _page = index;
-            });
-          },
-          letIndexChange: (index) => true,
         ),
-        body: Container(
-          color: Colors.blueAccent,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _widgetOptions[_page],
-              ],
-            ),
-          ),
-        ));
+      ),
+    );
   }
 }
