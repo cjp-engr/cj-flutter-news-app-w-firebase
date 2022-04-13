@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           //primarySwatch: Colors.blue,
           ),
+      //home: const MyHomePage(),
       home: const BottomNavBar(),
     );
   }
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // void _getNews() {
   //   NewsApiServices a = NewsApiServices();
-  //   a.getNews();
+  //   a.getLatestNews();
   // }
 
   @override

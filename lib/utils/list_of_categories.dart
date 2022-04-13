@@ -1,4 +1,5 @@
 enum ListOfCategories {
+  all,
   business,
   entertainment,
   environment,
@@ -11,6 +12,8 @@ enum ListOfCategories {
 extension ListOfCategoriesExtension on ListOfCategories {
   String get category {
     switch (this) {
+      case ListOfCategories.all:
+        return 'All';
       case ListOfCategories.business:
         return 'Business';
       case ListOfCategories.entertainment:

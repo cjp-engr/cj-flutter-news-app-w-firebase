@@ -24,13 +24,13 @@ class News {
 
   News.fromJson(Map<String, dynamic> json)
       : title = json['title'] ?? 'No Author',
-        creators = json['creator'] ?? 'No Creator', //multiple data
+        creators = json['creator'] ?? ['No Creator'], //multiple data
         description = json['description'] ?? 'No Description',
         content = json['content'] ?? 'No Content',
         publishedDate = json['pubDate'] ?? 'No Published Date',
         imageUrl = json['image_url'] ?? 'No Image Url',
-        countries = json['country'] ?? 'No Country', //multiple data
-        categories = json['category'] ?? 'No Categories', //multiple data
+        countries = json['country'] ?? ['No Country'], //multiple data
+        categories = json['category'] ?? ['No Categories'], //multiple data
         fullDescription = json['full_description'] ?? 'No Full Description',
         isSaved = false;
 

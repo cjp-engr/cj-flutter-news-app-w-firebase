@@ -1,13 +1,27 @@
 import 'dart:convert';
 
-import 'package:news_app_with_firebase/models/news.dart';
 import 'package:http/http.dart' as http;
+import 'package:news_app_with_firebase/constants/constants.dart';
+
+import 'package:news_app_with_firebase/models/news.dart';
 
 class NewsApiServices {
-  Future<List<News>?> getNews() async {
-    String apiKey = 'pub_63780dcbb382588eb4975b85906a0dcbbd43';
-    final Uri uri =
-        Uri.parse('https://newsdata.io/api/1/news?apikey=$apiKey&country=au');
+  final http.Client httpClient;
+  NewsApiServices({
+    required this.httpClient,
+  });
+
+  Future<List<News>?> getLatestNews() async {
+    final Uri uri = Uri(
+      scheme: 'https',
+      host: kHost,
+      path: '/api/1/news',
+      queryParameters: {
+        'apikey': apiKey,
+        'country': 'au',
+      },
+    );
+    //print(uri.toString());
 
     try {
       final http.Response response = await http.get(uri);

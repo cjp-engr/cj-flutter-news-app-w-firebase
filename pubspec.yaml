@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  flutter_carousel_widget: ^1.0.5
   font_awesome_flutter: ^10.1.0
   http: ^0.13.4
 
