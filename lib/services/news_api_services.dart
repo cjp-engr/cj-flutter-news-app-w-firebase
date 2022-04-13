@@ -33,7 +33,6 @@ class NewsApiServices {
       final newsJson = json.decode(response.body)['results'];
       List<News> results =
           (newsJson as List).map((e) => News.fromJson(e)).toList();
-      //print(results[0].title);
       return results;
     } catch (e) {
       rethrow;
