@@ -19,4 +19,16 @@ class NewsRepository {
       throw CustomError(errMsg: e.toString());
     }
   }
+
+  Future<List<News>?> fetchNewsByCategory(String category) async {
+    try {
+      List<News>? latestNews =
+          await newsApiServices.getNewsByCategory(category);
+      return latestNews;
+    } on NewsException catch (e) {
+      throw CustomError(errMsg: e.message);
+    } catch (e) {
+      throw CustomError(errMsg: e.toString());
+    }
+  }
 }

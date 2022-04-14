@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_with_firebase/blocs/latest_news/latest_news_bloc.dart';
+import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:news_app_with_firebase/repositories/news_repository.dart';
 import 'package:news_app_with_firebase/services/news_api_services.dart';
 import 'package:news_app_with_firebase/widgets/bottom_nav_bar.dart';
@@ -24,8 +24,18 @@ class MyApp extends StatelessWidget {
       ),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => LatestNewsBloc(
+          // BlocProvider(
+          //   create: (context) => LatestNewsBloc(
+          //     newsRepository: RepositoryProvider.of<NewsRepository>(context),
+          //   )..add(FetchLatestNewsEvent()),
+          // ),
+          // BlocProvider<LatestNewsBloc>(
+          //   create: (context) => LatestNewsBloc(
+          //     newsRepository: context.read<NewsRepository>(),
+          //   ),
+          // ),
+          BlocProvider<ActiveCategoryBloc>(
+            create: (context) => ActiveCategoryBloc(
               newsRepository: RepositoryProvider.of<NewsRepository>(context),
             )..add(FetchLatestNewsEvent()),
           ),
@@ -33,8 +43,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-              //primarySwatch: Colors.blue,
-              ),
+            //primarySwatch: Colors.blue,
+            fontFamily: 'Righteous',
+          ),
           //home: const MyHomePage(),
           home: const BottomNavBar(),
         ),

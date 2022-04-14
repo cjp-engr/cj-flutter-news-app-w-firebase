@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
-import 'package:news_app_with_firebase/blocs/latest_news/latest_news_bloc.dart';
+import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 
 final List<String> imgList = [
   'https://source.unsplash.com/random/1920x1920/?abstracts',
@@ -17,7 +17,8 @@ class LatestNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final newsList = context.watch<LatestNewsBloc>().state.newsList;
+    //final newsList = context.watch<LatestNewsBloc>().state.newsList;
+    final newsList = context.watch<ActiveCategoryBloc>().state.newsList;
     return Container(
       constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.width / 1.5,

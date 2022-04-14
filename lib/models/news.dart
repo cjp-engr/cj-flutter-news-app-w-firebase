@@ -5,8 +5,8 @@ class News {
   final String? content;
   final String? publishedDate;
   final String? imageUrl;
-  final List<dynamic>? countries;
-  final List<dynamic>? categories;
+  final String? countries;
+  final String? categories;
   final String? fullDescription;
   final bool? isSaved;
   News({
@@ -30,8 +30,8 @@ class News {
         publishedDate = json['pubDate'] ?? 'No Published Date',
         imageUrl = json['image_url'] ??
             'https://source.unsplash.com/random/1920x1920/?abstracts',
-        countries = json['country'] ?? ['No Country'], //multiple data
-        categories = json['category'] ?? ['No Categories'], //multiple data
+        countries = json['country'][0] ?? 'No Country', //multiple data
+        categories = json['category'][0] ?? 'No Categories', //multiple data
         fullDescription = json['full_description'] ?? 'No Full Description',
         isSaved = false;
 
@@ -42,8 +42,8 @@ class News {
         content: '',
         publishedDate: '',
         imageUrl: '',
-        countries: [],
-        categories: [],
+        countries: '',
+        categories: '',
         fullDescription: '',
         isSaved: false,
       );

@@ -20,25 +20,47 @@ class HomePage extends StatelessWidget {
               height: 60,
               child: Categories(),
             ),
-            Expanded(
-              child: ListView(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Text('Latest News'),
-                  ),
-                  LatestNews(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Text('Around the world'),
-                  ),
-                  AroundTheWorld(),
-                ],
-              ),
-            ),
+            _allCategoryScreen(),
           ],
         ),
       ),
     );
   }
+
+  Widget _allCategoryScreen() {
+    return Expanded(
+      child: ListView(
+        children: const [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Text('Latest News'),
+          ),
+          LatestNews(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Text('Around the world'),
+          ),
+          AroundTheWorld(),
+        ],
+      ),
+    );
+  }
+
+  // Widget _otherCategoriesScreen() {
+  //   return Expanded(
+  //     child: ListView.builder(
+  //       itemBuilder: (context, position) {
+  //         return Card(
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(16.0),
+  //             child: Text(
+  //               position.toString(),
+  //               style: const TextStyle(fontSize: 22.0),
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 }
