@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'dart:convert' show utf8;
 import 'package:news_app_with_firebase/constants/constants.dart';
 
 import 'package:news_app_with_firebase/models/news.dart';
@@ -18,19 +19,20 @@ class NewsApiServices {
       path: '/api/1/news',
       queryParameters: {
         'apikey': apiKey,
-        'country': 'au',
+        'country': 'ph',
       },
     );
     //print(uri.toString());
 
     try {
-      final http.Response response = await http.get(uri);
+      final http.Response response =
+          await http.get(uri, headers: {'Content-Type': 'application/json'});
 
       if (response.statusCode != 200) {
         throw Exception('response.statusCode != 200');
       }
 
-      final newsJson = json.decode(response.body)['results'];
+      final newsJson = json.decode(utf8.decode(response.bodyBytes))['results'];
       List<News> results =
           (newsJson as List).map((e) => News.fromJson(e)).toList();
       return results;

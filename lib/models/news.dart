@@ -28,7 +28,8 @@ class News {
         description = json['description'] ?? 'No Description',
         content = json['content'] ?? 'No Content',
         publishedDate = json['pubDate'] ?? 'No Published Date',
-        imageUrl = json['image_url'] ?? 'No Image Url',
+        imageUrl = json['image_url'] ??
+            'https://source.unsplash.com/random/1920x1920/?abstracts',
         countries = json['country'] ?? ['No Country'], //multiple data
         categories = json['category'] ?? ['No Categories'], //multiple data
         fullDescription = json['full_description'] ?? 'No Full Description',
