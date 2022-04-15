@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 
 class OtherCategoriesScreen extends StatelessWidget {
@@ -20,6 +21,21 @@ class OtherCategoriesScreen extends StatelessWidget {
                 children: [
                   _image(context, nList.imageUrl),
                   _title(nList.title),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: _creators(nList.creators!),
+                      ),
+                      Flexible(
+                        child: _country(nList.countries!),
+                      ),
+                      Flexible(
+                        child: _publishedDate(nList.publishedDate!),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             );
@@ -59,9 +75,13 @@ class OtherCategoriesScreen extends StatelessWidget {
           Object exception,
           StackTrace? stackTrace,
         ) {
-          return const Text(
-            'Oops!! An error occurred. 😢',
-            style: TextStyle(fontSize: 16.0),
+          return Image.network(
+            'https://picsum.photos/300',
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 4.5,
+            fit: BoxFit.cover,
+            color: Colors.grey.withOpacity(1),
+            colorBlendMode: BlendMode.modulate,
           );
         },
       ),
@@ -79,5 +99,32 @@ class OtherCategoriesScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _publishedDate(String pubDate) {
+    //final pDate = DateFormat('yyyy-MM-dd HH:MM:SS').parse(pubDate);
+    final pDate = DateFormat.yMMMd()
+        .format(DateFormat('yyyy-MM-dd HH:MM:SS').parse(pubDate));
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Text(pDate),
+    );
+  }
+
+  Widget _country(String country) {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Text(country),
+    );
+  }
+
+  Widget _creators(List<dynamic> creators) {
+    for (var creator in creators) {
+      return Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(creator),
+      );
+    }
+    return const Text('Jesus Christ');
   }
 }
