@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:news_app_with_firebase/utils/list_of_categories.dart';
 
-class Categories extends StatelessWidget {
-  const Categories({Key? key}) : super(key: key);
+class CategoriesList extends StatelessWidget {
+  const CategoriesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +17,10 @@ class Categories extends StatelessWidget {
             onPressed: () {
               context.read<ActiveCategoryBloc>().add(
                     const FetchNewsCategoryEvent(
-                        activeCategory: ListOfCategories.all),
+                        activeCategory: Categories.all),
                   );
             },
-            child: Text(ListOfCategories.all.category),
+            child: Text(Categories.all.name),
           ),
         ),
         Padding(
@@ -29,10 +29,10 @@ class Categories extends StatelessWidget {
             onPressed: () {
               context.read<ActiveCategoryBloc>().add(
                     const FetchNewsCategoryEvent(
-                        activeCategory: ListOfCategories.business),
+                        activeCategory: Categories.business),
                   );
             },
-            child: Text(ListOfCategories.business.category),
+            child: Text(Categories.business.name),
           ),
         ),
         Padding(
@@ -41,10 +41,10 @@ class Categories extends StatelessWidget {
             onPressed: () {
               context.read<ActiveCategoryBloc>().add(
                     const FetchNewsCategoryEvent(
-                        activeCategory: ListOfCategories.entertainment),
+                        activeCategory: Categories.entertainment),
                   );
             },
-            child: Text(ListOfCategories.entertainment.category),
+            child: Text(Categories.entertainment.name),
           ),
         ),
         Padding(
@@ -53,10 +53,10 @@ class Categories extends StatelessWidget {
             onPressed: () {
               context.read<ActiveCategoryBloc>().add(
                     const FetchNewsCategoryEvent(
-                        activeCategory: ListOfCategories.environment),
+                        activeCategory: Categories.environment),
                   );
             },
-            child: Text(ListOfCategories.environment.category),
+            child: Text(Categories.environment.name),
           ),
         ),
         Padding(
@@ -65,10 +65,10 @@ class Categories extends StatelessWidget {
             onPressed: () {
               context.read<ActiveCategoryBloc>().add(
                     const FetchNewsCategoryEvent(
-                        activeCategory: ListOfCategories.food),
+                        activeCategory: Categories.food),
                   );
             },
-            child: Text(ListOfCategories.food.category),
+            child: Text(Categories.food.name),
           ),
         ),
         Padding(
@@ -77,10 +77,10 @@ class Categories extends StatelessWidget {
             onPressed: () {
               context.read<ActiveCategoryBloc>().add(
                     const FetchNewsCategoryEvent(
-                        activeCategory: ListOfCategories.health),
+                        activeCategory: Categories.health),
                   );
             },
-            child: Text(ListOfCategories.health.category),
+            child: Text(Categories.health.name),
           ),
         ),
         Padding(
@@ -89,10 +89,10 @@ class Categories extends StatelessWidget {
             onPressed: () {
               context.read<ActiveCategoryBloc>().add(
                     const FetchNewsCategoryEvent(
-                        activeCategory: ListOfCategories.politics),
+                        activeCategory: Categories.politics),
                   );
             },
-            child: Text(ListOfCategories.politics.category),
+            child: Text(Categories.politics.name),
           ),
         ),
         Padding(
@@ -101,10 +101,10 @@ class Categories extends StatelessWidget {
             onPressed: () {
               context.read<ActiveCategoryBloc>().add(
                     const FetchNewsCategoryEvent(
-                        activeCategory: ListOfCategories.science),
+                        activeCategory: Categories.science),
                   );
             },
-            child: Text(ListOfCategories.science.category),
+            child: Text(Categories.science.name),
           ),
         ),
       ],

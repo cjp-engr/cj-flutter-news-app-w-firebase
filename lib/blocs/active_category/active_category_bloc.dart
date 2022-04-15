@@ -42,66 +42,66 @@ class ActiveCategoryBloc
   ) async {
     emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
     try {
-      if (ListOfCategories.all == event.activeCategory) {
+      if (Categories.all == event.activeCategory) {
         final List<News>? newsList = await newsRepository.fetchNewsList();
         emit(state.copyWith(
-          activeCategory: ListOfCategories.all,
+          activeCategory: Categories.all,
           newsList: newsList,
           loadingStatus: NewsLoadingStatus.loaded,
         ));
-      } else if (ListOfCategories.business == event.activeCategory) {
-        final List<News>? newsList = await newsRepository.fetchNewsByCategory(
-            ListOfCategories.business.category.toLowerCase());
+      } else if (Categories.business == event.activeCategory) {
+        final List<News>? newsList =
+            await newsRepository.fetchNewsByCategory(Categories.business.name);
         emit(state.copyWith(
-          activeCategory: ListOfCategories.business,
+          activeCategory: Categories.business,
           newsList: newsList,
           loadingStatus: NewsLoadingStatus.loaded,
         ));
-      } else if (ListOfCategories.entertainment == event.activeCategory) {
-        final List<News>? newsList = await newsRepository.fetchNewsByCategory(
-            ListOfCategories.entertainment.category.toLowerCase());
-        emit(state.copyWith(
-          activeCategory: ListOfCategories.entertainment,
-          newsList: newsList,
-          loadingStatus: NewsLoadingStatus.loaded,
-        ));
-      } else if (ListOfCategories.environment == event.activeCategory) {
-        final List<News>? newsList = await newsRepository.fetchNewsByCategory(
-            ListOfCategories.environment.category.toLowerCase());
-        emit(state.copyWith(
-          activeCategory: ListOfCategories.environment,
-          newsList: newsList,
-          loadingStatus: NewsLoadingStatus.loaded,
-        ));
-      } else if (ListOfCategories.food == event.activeCategory) {
+      } else if (Categories.entertainment == event.activeCategory) {
         final List<News>? newsList = await newsRepository
-            .fetchNewsByCategory(ListOfCategories.food.category.toLowerCase());
+            .fetchNewsByCategory(Categories.entertainment.name);
         emit(state.copyWith(
-          activeCategory: ListOfCategories.food,
+          activeCategory: Categories.entertainment,
           newsList: newsList,
           loadingStatus: NewsLoadingStatus.loaded,
         ));
-      } else if (ListOfCategories.health == event.activeCategory) {
-        final List<News>? newsList = await newsRepository.fetchNewsByCategory(
-            ListOfCategories.health.category.toLowerCase());
+      } else if (Categories.environment == event.activeCategory) {
+        final List<News>? newsList = await newsRepository
+            .fetchNewsByCategory(Categories.environment.name);
         emit(state.copyWith(
-          activeCategory: ListOfCategories.health,
+          activeCategory: Categories.environment,
           newsList: newsList,
           loadingStatus: NewsLoadingStatus.loaded,
         ));
-      } else if (ListOfCategories.politics == event.activeCategory) {
-        final List<News>? newsList = await newsRepository.fetchNewsByCategory(
-            ListOfCategories.politics.category.toLowerCase());
+      } else if (Categories.food == event.activeCategory) {
+        final List<News>? newsList =
+            await newsRepository.fetchNewsByCategory(Categories.food.name);
         emit(state.copyWith(
-          activeCategory: ListOfCategories.politics,
+          activeCategory: Categories.food,
           newsList: newsList,
           loadingStatus: NewsLoadingStatus.loaded,
         ));
-      } else if (ListOfCategories.science == event.activeCategory) {
-        final List<News>? newsList = await newsRepository.fetchNewsByCategory(
-            ListOfCategories.science.category.toLowerCase());
+      } else if (Categories.health == event.activeCategory) {
+        final List<News>? newsList =
+            await newsRepository.fetchNewsByCategory(Categories.health.name);
         emit(state.copyWith(
-          activeCategory: ListOfCategories.science,
+          activeCategory: Categories.health,
+          newsList: newsList,
+          loadingStatus: NewsLoadingStatus.loaded,
+        ));
+      } else if (Categories.politics == event.activeCategory) {
+        final List<News>? newsList =
+            await newsRepository.fetchNewsByCategory(Categories.politics.name);
+        emit(state.copyWith(
+          activeCategory: Categories.politics,
+          newsList: newsList,
+          loadingStatus: NewsLoadingStatus.loaded,
+        ));
+      } else if (Categories.science == event.activeCategory) {
+        final List<News>? newsList =
+            await newsRepository.fetchNewsByCategory(Categories.science.name);
+        emit(state.copyWith(
+          activeCategory: Categories.science,
           newsList: newsList,
           loadingStatus: NewsLoadingStatus.loaded,
         ));

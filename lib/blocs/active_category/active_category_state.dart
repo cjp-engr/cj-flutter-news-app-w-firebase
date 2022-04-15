@@ -9,7 +9,7 @@ enum NewsLoadingStatus {
 
 class ActiveCategoryState extends Equatable {
   final NewsLoadingStatus loadingStatus;
-  final ListOfCategories activeCategory;
+  final Categories activeCategory;
   final List<News> newsList;
   final CustomError customError;
   const ActiveCategoryState({
@@ -22,7 +22,7 @@ class ActiveCategoryState extends Equatable {
   factory ActiveCategoryState.initial() {
     return const ActiveCategoryState(
       loadingStatus: NewsLoadingStatus.loading,
-      activeCategory: ListOfCategories.all,
+      activeCategory: Categories.all,
       newsList: [],
       customError: CustomError(),
     );
@@ -43,7 +43,7 @@ class ActiveCategoryState extends Equatable {
 
   ActiveCategoryState copyWith({
     NewsLoadingStatus? loadingStatus,
-    ListOfCategories? activeCategory,
+    Categories? activeCategory,
     List<News>? newsList,
     CustomError? customError,
   }) {

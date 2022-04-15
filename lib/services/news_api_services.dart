@@ -19,6 +19,7 @@ class NewsApiServices {
       queryParameters: {
         'apikey': apiKey,
         'country': 'ph',
+        'language': 'en',
       },
     );
 
@@ -48,6 +49,7 @@ class NewsApiServices {
       queryParameters: {
         'apikey': apiKey,
         'category': category,
+        'language': 'en',
       },
     );
 

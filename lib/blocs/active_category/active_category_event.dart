@@ -8,7 +8,7 @@ abstract class ActiveCategoryEvent extends Equatable {
 }
 
 class FetchNewsCategoryEvent extends ActiveCategoryEvent {
-  final ListOfCategories activeCategory;
+  final Categories activeCategory;
   const FetchNewsCategoryEvent({
     required this.activeCategory,
   });

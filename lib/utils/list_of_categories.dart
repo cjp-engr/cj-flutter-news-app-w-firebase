@@ -1,4 +1,4 @@
-enum ListOfCategories {
+enum Categories {
   all,
   business,
   entertainment,
@@ -9,24 +9,24 @@ enum ListOfCategories {
   science,
 }
 
-extension ListOfCategoriesExtension on ListOfCategories {
+extension CategoriesExtension on Categories {
   String get category {
     switch (this) {
-      case ListOfCategories.all:
+      case Categories.all:
         return 'All';
-      case ListOfCategories.business:
+      case Categories.business:
         return 'Business';
-      case ListOfCategories.entertainment:
+      case Categories.entertainment:
         return 'Entertainment';
-      case ListOfCategories.environment:
+      case Categories.environment:
         return 'Environment';
-      case ListOfCategories.food:
+      case Categories.food:
         return 'Food';
-      case ListOfCategories.health:
+      case Categories.health:
         return 'Health';
-      case ListOfCategories.politics:
+      case Categories.politics:
         return 'Politics';
-      case ListOfCategories.science:
+      case Categories.science:
         return 'Science';
     }
   }
