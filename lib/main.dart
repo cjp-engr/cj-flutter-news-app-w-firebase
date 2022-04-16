@@ -6,6 +6,7 @@ import 'package:news_app_with_firebase/services/news_api_services.dart';
 import 'package:news_app_with_firebase/widgets/bottom_nav_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/scheduler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    timeDilation = 3;
     return RepositoryProvider(
       create: (context) => NewsRepository(
         newsApiServices: NewsApiServices(
@@ -72,9 +74,25 @@ class MyApp extends StatelessWidget {
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-                // padding: MaterialStateProperty.all(
-                //   const EdgeInsets.symmetric(vertical: 15.0),
-                // ),
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.5);
+                    } else if (states.contains(MaterialState.disabled)) {
+                      return Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.5);
+                    }
+                    return Theme.of(context)
+                        .colorScheme
+                        .primary
+                        .withOpacity(0.5);
+                  },
+                ),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
