@@ -12,18 +12,20 @@ class OtherCategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final newsList = context.watch<ActiveCategoryBloc>().state.newsList;
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: ListView.separated(
-          itemCount: newsList.length,
-          itemBuilder: (BuildContext context, int index) {
-            var nList = newsList.elementAt(index);
-            return OpenContainer<bool>(
-              openBuilder: (BuildContext _, VoidCallback openContainer) {
-                return const ArticleSection();
-              },
-              closedBuilder: (BuildContext _, VoidCallback openContainer) {
-                return Card(
+      child: ListView.separated(
+        itemCount: newsList.length,
+        itemBuilder: (BuildContext context, int index) {
+          var nList = newsList.elementAt(index);
+          return OpenContainer<bool>(
+            openBuilder: (BuildContext _, VoidCallback openContainer) {
+              return ArticleSection(
+                news: nList,
+              );
+            },
+            closedBuilder: (BuildContext _, VoidCallback openContainer) {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: Card(
                   child: Column(
                     children: [
                       Stack(
@@ -48,17 +50,17 @@ class OtherCategoriesScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                );
-              },
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const Divider(
-              color: Colors.white,
-              height: 10,
-            );
-          },
-        ),
+                ),
+              );
+            },
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(
+            color: Colors.white,
+            height: 20,
+          );
+        },
       ),
     );
   }
@@ -71,7 +73,7 @@ class OtherCategoriesScreen extends StatelessWidget {
       ),
       child: Image.network(
         imageUrl!,
-        width: MediaQuery.of(context).size.width,
+        width: double.infinity,
         height: MediaQuery.of(context).size.height / 5,
         fit: BoxFit.cover,
         color: Colors.grey.withOpacity(1),
@@ -96,7 +98,7 @@ class OtherCategoriesScreen extends StatelessWidget {
         ) {
           return Image.asset(
             'assets/images/background-image.jpg',
-            width: MediaQuery.of(context).size.width,
+            width: double.infinity,
             height: MediaQuery.of(context).size.height / 4.5,
             fit: BoxFit.cover,
             color: Colors.grey.withOpacity(1),
@@ -194,8 +196,9 @@ class OtherCategoriesScreen extends StatelessWidget {
   }
 
   Widget _publishedDate(BuildContext context, String pubDate) {
-    final pDate = DateFormat.yMMMd()
-        .format(DateFormat('yyyy-MM-dd HH:MM:SS').parse(pubDate));
+    final pDate = pubDate.substring(0, pubDate.indexOf(' ') + 1);
+    final publishedDate =
+        DateFormat.yMMMd().format(DateFormat('yyyy-MM-dd').parse(pDate));
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Container(
@@ -208,7 +211,7 @@ class OtherCategoriesScreen extends StatelessWidget {
           padding:
               const EdgeInsets.only(top: 7, bottom: 7, left: 10, right: 10),
           child: Text(
-            pDate.trim(),
+            publishedDate.trim(),
             style: Theme.of(context).textTheme.caption!.merge(
                   const TextStyle(
                     color: Colors.white,

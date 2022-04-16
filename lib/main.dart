@@ -37,8 +37,12 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
+            cardTheme: const CardTheme(
+              elevation: 10,
+            ),
             //primarySwatch: Colors.blue,
             textTheme: const TextTheme(
               button: TextStyle(
@@ -54,7 +58,7 @@ class MyApp extends StatelessWidget {
               ),
               subtitle1: TextStyle(
                 fontSize: 25.0,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.bold,
               ),
               subtitle2: TextStyle(
                 fontSize: 23.0,
@@ -67,35 +71,35 @@ class MyApp extends StatelessWidget {
                 fontSize: 19.0,
               ),
               caption: TextStyle(
-                fontSize: 15.0,
+                fontSize: 19.0,
               ),
             ).apply(
-              fontFamily: 'RobotoMono',
+              fontFamily: 'ABeeZee',
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.pressed)) {
-                      return Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.5);
-                    } else if (states.contains(MaterialState.disabled)) {
-                      return Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.5);
-                    }
-                    return Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .withOpacity(0.5);
-                  },
-                ),
+                // backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                //   (Set<MaterialState> states) {
+                //     if (states.contains(MaterialState.pressed)) {
+                //       return Theme.of(context)
+                //           .colorScheme
+                //           .primary
+                //           .withOpacity(0.5);
+                //     } else if (states.contains(MaterialState.disabled)) {
+                //       return Theme.of(context)
+                //           .colorScheme
+                //           .primary
+                //           .withOpacity(0.5);
+                //     }
+                //     return Theme.of(context)
+                //         .colorScheme
+                //         .primary
+                //         .withOpacity(0.5);
+                //   },
+                // ),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
                 elevation: MaterialStateProperty.all(10),

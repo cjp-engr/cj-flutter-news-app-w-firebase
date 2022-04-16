@@ -66,13 +66,17 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: RobotoMono
+    - family: ABeeZee
       fonts:
-        - asset: assets/fonts/RobotoMono-Bold.ttf
-        - asset: assets/fonts/RobotoMono-Light.ttf
-        - asset: assets/fonts/RobotoMono-Medium.ttf
-        - asset: assets/fonts/RobotoMono-Regular.ttf
-        - asset: assets/fonts/RobotoMono-SemiBold.ttf
+        - asset: assets/fonts/ABeeZee-Regular.ttf
+  # fonts:
+  #   - family: OpenSans
+  #     fonts:
+  #       - asset: assets/fonts/OpenSans-Bold.ttf
+  #       - asset: assets/fonts/OpenSans-Light.ttf
+  #       - asset: assets/fonts/OpenSans-Medium.ttf
+  #       - asset: assets/fonts/OpenSans-Regular.ttf
+  #       - asset: assets/fonts/OpenSans-SemiBold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

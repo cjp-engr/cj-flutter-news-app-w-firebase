@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             child: Text(
               'Latest News',
               style: Theme.of(context).textTheme.headline5,
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
           ),
           const LatestNewsSection(),
           Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             child: Text(
               'Around the world',
               style: Theme.of(context).textTheme.headline5,

@@ -17,7 +17,7 @@ class AroundTheWorldSection extends StatelessWidget {
   Widget _aroundTheWorld(BuildContext context, List<News>? newsList) {
     return SafeArea(
       child: SizedBox(
-        width: MediaQuery.of(context).size.width / 2,
+        width: double.infinity / 2,
         height: MediaQuery.of(context).size.height / 3,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -29,16 +29,21 @@ class AroundTheWorldSection extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 3,
               child: OpenContainer<bool>(
                 openBuilder: (BuildContext _, VoidCallback openContainer) {
-                  return const ArticleSection();
+                  return ArticleSection(
+                    news: nList,
+                  );
                 },
                 closedBuilder: (BuildContext _, VoidCallback openContainer) {
-                  return Card(
-                    child: Stack(
-                      children: [
-                        _image(context, nList.imageUrl),
-                        _title(context, nList.title),
-                        _country(context, nList.countries),
-                      ],
+                  return Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Card(
+                      child: Stack(
+                        children: [
+                          _image(context, nList.imageUrl),
+                          _title(context, nList.title),
+                          _country(context, nList.countries),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -84,7 +89,7 @@ class AroundTheWorldSection extends StatelessWidget {
           // );
           return Image.asset(
             'assets/images/background-image.jpg',
-            width: MediaQuery.of(context).size.width,
+            width: double.infinity,
             height: MediaQuery.of(context).size.height / 4.5,
             fit: BoxFit.cover,
             color: Colors.grey.withOpacity(1),
@@ -105,7 +110,7 @@ class AroundTheWorldSection extends StatelessWidget {
             title!.trim().length < 60
                 ? title.trim()
                 : title.trim().substring(0, 60) + '...',
-            style: Theme.of(context).textTheme.caption!.merge(
+            style: Theme.of(context).textTheme.bodyText2!.merge(
                   const TextStyle(
                     color: Colors.white,
                   ),

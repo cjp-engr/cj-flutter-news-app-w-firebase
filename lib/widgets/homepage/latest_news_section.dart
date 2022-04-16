@@ -20,7 +20,7 @@ class LatestNewsSection extends StatelessWidget {
         ContainerTransitionType.fadeThrough;
     return SafeArea(
       child: SizedBox(
-        width: MediaQuery.of(context).size.width / 1.2,
+        width: double.infinity,
         height: MediaQuery.of(context).size.height / 3.5,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -32,17 +32,22 @@ class LatestNewsSection extends StatelessWidget {
               child: OpenContainer<bool>(
                 transitionType: _transitionType,
                 openBuilder: (BuildContext _, VoidCallback openContainer) {
-                  return const ArticleSection();
+                  return ArticleSection(
+                    news: nList,
+                  );
                 },
                 closedBuilder: (BuildContext _, VoidCallback openContainer) {
-                  return Card(
-                    child: Stack(
-                      children: [
-                        _image(context, nList.imageUrl),
-                        _title(context, nList.title),
-                        _category(context, nList.categories),
-                        _creators(context, nList.creators),
-                      ],
+                  return Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Card(
+                      child: Stack(
+                        children: [
+                          _image(context, nList.imageUrl),
+                          _title(context, nList.title),
+                          _category(context, nList.categories),
+                          _creators(context, nList.creators),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -84,7 +89,7 @@ class LatestNewsSection extends StatelessWidget {
         ) {
           return Image.asset(
             'assets/images/background-image.jpg',
-            width: MediaQuery.of(context).size.width,
+            width: double.infinity,
             height: MediaQuery.of(context).size.height / 4.5,
             fit: BoxFit.cover,
             color: Colors.grey.withOpacity(1),

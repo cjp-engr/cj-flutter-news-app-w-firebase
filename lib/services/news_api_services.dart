@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:news_app_with_firebase/constants/constants.dart';
-
 import 'package:news_app_with_firebase/models/news.dart';
 
 class NewsApiServices {
