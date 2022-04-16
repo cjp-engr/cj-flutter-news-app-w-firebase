@@ -25,16 +25,6 @@ class MyApp extends StatelessWidget {
       ),
       child: MultiBlocProvider(
         providers: [
-          // BlocProvider(
-          //   create: (context) => LatestNewsBloc(
-          //     newsRepository: RepositoryProvider.of<NewsRepository>(context),
-          //   )..add(FetchLatestNewsEvent()),
-          // ),
-          // BlocProvider<LatestNewsBloc>(
-          //   create: (context) => LatestNewsBloc(
-          //     newsRepository: context.read<NewsRepository>(),
-          //   ),
-          // ),
           BlocProvider<ActiveCategoryBloc>(
             create: (context) => ActiveCategoryBloc(
               newsRepository: RepositoryProvider.of<NewsRepository>(context),
@@ -48,7 +38,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: ThemeData(
             //primarySwatch: Colors.blue,
-            fontFamily: 'Righteous',
+            fontFamily: 'RobotoMono',
           ),
           //home: const MyHomePage(),
           home: BottomNavBar(),
