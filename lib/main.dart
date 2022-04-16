@@ -38,7 +38,51 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: ThemeData(
             //primarySwatch: Colors.blue,
-            fontFamily: 'RobotoMono',
+            textTheme: const TextTheme(
+              button: TextStyle(
+                fontSize: 20.0,
+              ),
+              headline5: TextStyle(
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+              ),
+              headline6: TextStyle(
+                fontSize: 26.5,
+                fontWeight: FontWeight.bold,
+              ),
+              subtitle1: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w600,
+              ),
+              subtitle2: TextStyle(
+                fontSize: 23.0,
+                fontWeight: FontWeight.w600,
+              ),
+              bodyText1: TextStyle(
+                fontSize: 21.0,
+              ),
+              bodyText2: TextStyle(
+                fontSize: 19.0,
+              ),
+              caption: TextStyle(
+                fontSize: 15.0,
+              ),
+            ).apply(
+              fontFamily: 'RobotoMono',
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                // padding: MaterialStateProperty.all(
+                //   const EdgeInsets.symmetric(vertical: 15.0),
+                // ),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+                elevation: MaterialStateProperty.all(10),
+              ),
+            ),
           ),
           //home: const MyHomePage(),
           home: BottomNavBar(),

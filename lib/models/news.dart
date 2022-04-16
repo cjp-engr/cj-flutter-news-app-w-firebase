@@ -24,7 +24,7 @@ class News {
 
   News.fromJson(Map<String, dynamic> json)
       : title = json['title'] ?? 'No Author',
-        creators = json['creator'] ?? ['Jesus Christ'], //multiple data
+        creators = json['creator'] ?? ['Jane Doe'], //multiple data
         description = json['description'] ?? 'No Description',
         content = json['content'] ?? 'No Content',
         publishedDate = json['pubDate'] ?? 'No Published Date',
