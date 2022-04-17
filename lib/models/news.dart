@@ -1,3 +1,7 @@
+import 'package:uuid/uuid.dart';
+
+Uuid uuid = const Uuid();
+
 class News {
   final String? title;
   final List<dynamic>? creators;
@@ -9,6 +13,7 @@ class News {
   final String? categories;
   final String? fullDescription;
   final bool? isSaved;
+  String id;
   News({
     this.title,
     this.creators,
@@ -20,6 +25,7 @@ class News {
     this.categories,
     this.fullDescription,
     this.isSaved,
+    required this.id,
   });
 
   News.fromJson(Map<String, dynamic> json)
@@ -32,7 +38,8 @@ class News {
         countries = json['country'][0] ?? 'No Country', //multiple data
         categories = json['category'][0] ?? 'No Categories', //multiple data
         fullDescription = json['full_description'] ?? 'No Full Description',
-        isSaved = false;
+        isSaved = false,
+        id = uuid.v4();
 
   factory News.initial() => News(
         title: '',
@@ -45,5 +52,6 @@ class News {
         categories: '',
         fullDescription: '',
         isSaved: false,
+        id: '',
       );
 }

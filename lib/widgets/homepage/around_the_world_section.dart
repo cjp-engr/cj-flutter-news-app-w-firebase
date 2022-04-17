@@ -87,8 +87,8 @@ class AroundTheWorldSection extends StatelessWidget {
           //   'Oops!! An error occurred. 😢',
           //   style: TextStyle(fontSize: 16.0),
           // );
-          return Image.asset(
-            'assets/images/background-image.jpg',
+          return Image.network(
+            'https://picsum.photos/300',
             width: double.infinity,
             height: MediaQuery.of(context).size.height / 4.5,
             fit: BoxFit.cover,

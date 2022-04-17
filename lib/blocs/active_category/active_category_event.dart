@@ -15,3 +15,10 @@ class FetchNewsCategoryEvent extends ActiveCategoryEvent {
 }
 
 class FetchLatestNewsEvent extends ActiveCategoryEvent {}
+
+class ToggleSavedNewsEvent extends ActiveCategoryEvent {
+  final String id;
+  const ToggleSavedNewsEvent({
+    required this.id,
+  });
+}

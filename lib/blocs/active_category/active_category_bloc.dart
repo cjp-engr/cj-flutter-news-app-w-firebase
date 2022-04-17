@@ -18,6 +18,29 @@ class ActiveCategoryBloc
   }) : super(ActiveCategoryState.initial()) {
     on<FetchLatestNewsEvent>(_fetchLatestNews);
     on<FetchNewsCategoryEvent>(_fetchNewsCategory);
+    on<ToggleSavedNewsEvent>(_toggleSavedNews);
+  }
+
+  void _toggleSavedNews(
+    ToggleSavedNewsEvent event,
+    Emitter<ActiveCategoryState> emit,
+  ) {
+    emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
+    final togNews = state.newsList.map(
+      (News news) {
+        if (event.id == news.id) {
+          return News(
+            id: news.id,
+            isSaved: !news.isSaved!,
+          );
+        }
+        return news;
+      },
+    ).toList();
+    emit(state.copyWith(
+      loadingStatus: NewsLoadingStatus.loaded,
+      newsList: togNews,
+    ));
   }
 
   FutureOr<void> _fetchLatestNews(
