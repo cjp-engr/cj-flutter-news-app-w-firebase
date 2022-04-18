@@ -10,12 +10,19 @@ enum NewsLoadingStatus {
 class ActiveCategoryState extends Equatable {
   final NewsLoadingStatus loadingStatus;
   final Categories activeCategory;
-  final List<News> newsList;
+  final List<News> allCategoriesnewsList;
+  final List<News> businessCategoriesnewsList;
+  final List<News> entertainmentCategoriesnewsList;
+  final List<News> environmentCategoriesnewsList;
+
   final CustomError customError;
   const ActiveCategoryState({
     required this.loadingStatus,
     required this.activeCategory,
-    required this.newsList,
+    required this.allCategoriesnewsList,
+    required this.businessCategoriesnewsList,
+    required this.entertainmentCategoriesnewsList,
+    required this.environmentCategoriesnewsList,
     required this.customError,
   });
 
@@ -23,7 +30,10 @@ class ActiveCategoryState extends Equatable {
     return const ActiveCategoryState(
       loadingStatus: NewsLoadingStatus.loading,
       activeCategory: Categories.all,
-      newsList: [],
+      allCategoriesnewsList: [],
+      businessCategoriesnewsList: [],
+      entertainmentCategoriesnewsList: [],
+      environmentCategoriesnewsList: [],
       customError: CustomError(),
     );
   }
@@ -32,25 +42,38 @@ class ActiveCategoryState extends Equatable {
   List<Object?> get props => [
         loadingStatus,
         activeCategory,
-        newsList,
+        allCategoriesnewsList,
+        businessCategoriesnewsList,
+        entertainmentCategoriesnewsList,
+        environmentCategoriesnewsList,
         customError,
       ];
 
   @override
   String toString() {
-    return 'ActiveCategoryState(loadingStatus: $loadingStatus, activeCategory: $activeCategory, newsList: $newsList, customError: $customError)';
+    return 'ActiveCategoryState(loadingStatus: $loadingStatus, activeCategory: $activeCategory, allCategoriesnewsList: $allCategoriesnewsList, businessCategoriesnewsList: $businessCategoriesnewsList, entertainmentCategoriesnewsList: $entertainmentCategoriesnewsList, environmentCategoriesnewsList: $environmentCategoriesnewsList, customError: $customError)';
   }
 
   ActiveCategoryState copyWith({
     NewsLoadingStatus? loadingStatus,
     Categories? activeCategory,
-    List<News>? newsList,
+    List<News>? allCategoriesnewsList,
+    List<News>? businessCategoriesnewsList,
+    List<News>? entertainmentCategoriesnewsList,
+    List<News>? environmentCategoriesnewsList,
     CustomError? customError,
   }) {
     return ActiveCategoryState(
       loadingStatus: loadingStatus ?? this.loadingStatus,
       activeCategory: activeCategory ?? this.activeCategory,
-      newsList: newsList ?? this.newsList,
+      allCategoriesnewsList:
+          allCategoriesnewsList ?? this.allCategoriesnewsList,
+      businessCategoriesnewsList:
+          businessCategoriesnewsList ?? this.businessCategoriesnewsList,
+      entertainmentCategoriesnewsList: entertainmentCategoriesnewsList ??
+          this.entertainmentCategoriesnewsList,
+      environmentCategoriesnewsList:
+          environmentCategoriesnewsList ?? this.environmentCategoriesnewsList,
       customError: customError ?? this.customError,
     );
   }

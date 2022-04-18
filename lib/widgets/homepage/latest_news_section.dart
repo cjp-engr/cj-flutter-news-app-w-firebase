@@ -10,7 +10,8 @@ class LatestNewsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final newsList = context.watch<ActiveCategoryBloc>().state.newsList;
+    final newsList =
+        context.watch<ActiveCategoryBloc>().state.allCategoriesnewsList;
 
     return _latestNews(context, newsList);
   }

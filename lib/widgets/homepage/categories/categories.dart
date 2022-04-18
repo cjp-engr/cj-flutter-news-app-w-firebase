@@ -59,54 +59,6 @@ class CategoriesList extends StatelessWidget {
             child: Text(Categories.environment.name),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: ElevatedButton(
-            onPressed: () {
-              context.read<ActiveCategoryBloc>().add(
-                    const FetchNewsCategoryEvent(
-                        activeCategory: Categories.food),
-                  );
-            },
-            child: Text(Categories.food.name),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: ElevatedButton(
-            onPressed: () {
-              context.read<ActiveCategoryBloc>().add(
-                    const FetchNewsCategoryEvent(
-                        activeCategory: Categories.health),
-                  );
-            },
-            child: Text(Categories.health.name),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: ElevatedButton(
-            onPressed: () {
-              context.read<ActiveCategoryBloc>().add(
-                    const FetchNewsCategoryEvent(
-                        activeCategory: Categories.politics),
-                  );
-            },
-            child: Text(Categories.politics.name),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: ElevatedButton(
-            onPressed: () {
-              context.read<ActiveCategoryBloc>().add(
-                    const FetchNewsCategoryEvent(
-                        activeCategory: Categories.science),
-                  );
-            },
-            child: Text(Categories.science.name),
-          ),
-        ),
       ],
     );
   }

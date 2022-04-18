@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:animations/animations.dart';
+import 'package:news_app_with_firebase/utils/list_of_categories.dart';
 import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
 
 class OtherCategoriesScreen extends StatelessWidget {
@@ -10,7 +11,31 @@ class OtherCategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final newsList = context.watch<ActiveCategoryBloc>().state.newsList;
+    final selectedCategory =
+        context.watch<ActiveCategoryBloc>().state.activeCategory;
+    var newsList =
+        context.watch<ActiveCategoryBloc>().state.allCategoriesnewsList;
+    if (selectedCategory == Categories.all) {
+      newsList =
+          context.watch<ActiveCategoryBloc>().state.allCategoriesnewsList;
+    } else if (selectedCategory == Categories.business) {
+      newsList =
+          context.watch<ActiveCategoryBloc>().state.businessCategoriesnewsList;
+    } else if (selectedCategory == Categories.entertainment) {
+      newsList = context
+          .watch<ActiveCategoryBloc>()
+          .state
+          .entertainmentCategoriesnewsList;
+    } else if (selectedCategory == Categories.environment) {
+      newsList = context
+          .watch<ActiveCategoryBloc>()
+          .state
+          .environmentCategoriesnewsList;
+    } else {
+      newsList =
+          context.watch<ActiveCategoryBloc>().state.allCategoriesnewsList;
+    }
+
     return Expanded(
       child: ListView.separated(
         itemCount: newsList.length,

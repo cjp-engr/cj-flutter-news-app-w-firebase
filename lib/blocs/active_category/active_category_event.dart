@@ -16,10 +16,34 @@ class FetchNewsCategoryEvent extends ActiveCategoryEvent {
 
 class FetchLatestNewsEvent extends ActiveCategoryEvent {}
 
-class ToggleSavedNewsEvent extends ActiveCategoryEvent {
+class ToggleAllCategorySavedNewsEvent extends ActiveCategoryEvent {
   final String id;
 
-  const ToggleSavedNewsEvent({
+  const ToggleAllCategorySavedNewsEvent({
+    required this.id,
+  });
+}
+
+class ToggleBusinessCategorySavedNewsEvent extends ActiveCategoryEvent {
+  final String id;
+
+  const ToggleBusinessCategorySavedNewsEvent({
+    required this.id,
+  });
+}
+
+class ToggleEntertainmentCategorySavedNewsEvent extends ActiveCategoryEvent {
+  final String id;
+
+  const ToggleEntertainmentCategorySavedNewsEvent({
+    required this.id,
+  });
+}
+
+class ToggleEnvironmentCategorySavedNewsEvent extends ActiveCategoryEvent {
+  final String id;
+
+  const ToggleEnvironmentCategorySavedNewsEvent({
     required this.id,
   });
 }
