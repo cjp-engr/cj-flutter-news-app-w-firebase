@@ -31,6 +31,7 @@ class AroundTheWorldSection extends StatelessWidget {
                 openBuilder: (BuildContext _, VoidCallback openContainer) {
                   return ArticleSection(
                     news: nList,
+                    index: index,
                   );
                 },
                 closedBuilder: (BuildContext _, VoidCallback openContainer) {

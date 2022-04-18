@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 
 class ArticleSection extends StatelessWidget {
   final News news;
+  final int index;
   const ArticleSection({
     Key? key,
     required this.news,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -27,15 +30,25 @@ class ArticleSection extends StatelessWidget {
             onPressed: () {},
           ),
           IconButton(
-            icon: const FaIcon(
-              FontAwesomeIcons.bookmark,
-              size: 30,
+            icon: BlocBuilder<ActiveCategoryBloc, ActiveCategoryState>(
+              builder: (context, state) {
+                return state.newsList[index].isSaved!
+                    ? const Icon(
+                        Icons.bookmark,
+                        size: 30,
+                      )
+                    : const Icon(
+                        Icons.bookmark_border_outlined,
+                        size: 30,
+                      );
+              },
             ),
             onPressed: () {
-              context
-                  .read<ActiveCategoryBloc>()
-                  .add(ToggleSavedNewsEvent(id: news.id));
-              print(news.id);
+              context.read<ActiveCategoryBloc>().add(
+                    ToggleSavedNewsEvent(
+                      id: news.id,
+                    ),
+                  );
             },
           ),
         ],
@@ -60,7 +73,7 @@ class ArticleSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
-        news.title != null ? loremIpsumParagraph.substring(0, 40) : news.title!,
+        news.title != null ? news.title! : loremIpsumParagraph.substring(0, 40),
         style: Theme.of(context).textTheme.subtitle1,
       ),
     );
@@ -71,8 +84,8 @@ class ArticleSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         news.description != null
-            ? loremIpsumParagraph.substring(0, 100)
-            : news.description!,
+            ? news.description!
+            : loremIpsumParagraph.substring(0, 100),
         style: Theme.of(context).textTheme.bodyText1,
       ),
     );
@@ -152,19 +165,9 @@ class ArticleSection extends StatelessWidget {
   }
 
   Widget _content(BuildContext context) {
-    // String content = news.content!.toString().trim().replaceAll('.', '\n\n');
-    // String fullDesc =
-    //     news.fullDescription!.toString().trim().replaceAll('.', '\n\n');
-    // String lorem =
-    //     loremIpsumParagraph.toString().trim().replaceAll('.', '\n\n');
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
-        // news.content != null
-        //     ? news.content!
-        //     : news.fullDescription != null
-        //         ? news.fullDescription!
-        //         :
         loremIpsumParagraph,
         style: Theme.of(context).textTheme.bodyText1,
       ),

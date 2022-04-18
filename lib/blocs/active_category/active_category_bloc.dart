@@ -30,6 +30,15 @@ class ActiveCategoryBloc
       (News news) {
         if (event.id == news.id) {
           return News(
+            title: news.title,
+            creators: news.creators,
+            description: news.description,
+            content: news.content,
+            publishedDate: news.publishedDate,
+            imageUrl: news.imageUrl,
+            countries: news.countries,
+            categories: news.categories,
+            fullDescription: news.fullDescription,
             id: news.id,
             isSaved: !news.isSaved!,
           );
@@ -47,12 +56,13 @@ class ActiveCategoryBloc
     FetchLatestNewsEvent event,
     Emitter<ActiveCategoryState> emit,
   ) async {
-    emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
-
     try {
-      final List<News>? newsList = await newsRepository.fetchNewsList();
-      emit(state.copyWith(
-          loadingStatus: NewsLoadingStatus.loaded, newsList: newsList));
+      if (state.newsList.isEmpty) {
+        emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
+        final List<News>? newsList = await newsRepository.fetchNewsList();
+        emit(state.copyWith(
+            loadingStatus: NewsLoadingStatus.loaded, newsList: newsList));
+      }
     } on CustomError catch (e) {
       emit(state.copyWith(
           loadingStatus: NewsLoadingStatus.error, customError: e));
@@ -72,6 +82,7 @@ class ActiveCategoryBloc
           newsList: newsList,
           loadingStatus: NewsLoadingStatus.loaded,
         ));
+        if (state.newsList.isEmpty) {}
       } else if (Categories.business == event.activeCategory) {
         final List<News>? newsList =
             await newsRepository.fetchNewsByCategory(Categories.business.name);
