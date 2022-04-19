@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
+import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
 import 'package:news_app_with_firebase/repositories/news_repository.dart';
 import 'package:news_app_with_firebase/services/news_api_services.dart';
 import 'package:news_app_with_firebase/widgets/bottom_nav_bar.dart';
@@ -34,6 +35,11 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<BottomNavBarBloc>(
             create: (context) => BottomNavBarBloc(),
+          ),
+          BlocProvider<SavedNewsBloc>(
+            create: (context) => SavedNewsBloc(
+              activeCategoryBloc: BlocProvider.of<ActiveCategoryBloc>(context),
+            ),
           ),
         ],
         child: MaterialApp(

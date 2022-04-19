@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
+import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:news_app_with_firebase/utils/list_of_categories.dart';
@@ -35,7 +36,7 @@ class ArticleSection extends StatelessWidget {
           ),
           IconButton(
             icon: BlocBuilder<ActiveCategoryBloc, ActiveCategoryState>(
-              builder: (context, state) {
+              builder: (_, state) {
                 Icon iconBookMark(bool selectedCategory) {
                   if (selectedCategory) {
                     return const Icon(
@@ -52,16 +53,20 @@ class ArticleSection extends StatelessWidget {
 
                 if (state.activeCategory == Categories.all) {
                   return iconBookMark(
-                      state.allCategoriesnewsList[index].isSaved!);
+                    state.allCategoriesnewsList[index].isSaved!,
+                  );
                 } else if (state.activeCategory == Categories.business) {
                   return iconBookMark(
-                      state.businessCategoriesnewsList[index].isSaved!);
+                    state.businessCategoriesnewsList[index].isSaved!,
+                  );
                 } else if (state.activeCategory == Categories.entertainment) {
                   return iconBookMark(
-                      state.entertainmentCategoriesnewsList[index].isSaved!);
+                    state.entertainmentCategoriesnewsList[index].isSaved!,
+                  );
                 } else if (state.activeCategory == Categories.environment) {
                   return iconBookMark(
-                      state.environmentCategoriesnewsList[index].isSaved!);
+                    state.environmentCategoriesnewsList[index].isSaved!,
+                  );
                 } else {
                   return const Icon(
                     Icons.ac_unit_rounded,

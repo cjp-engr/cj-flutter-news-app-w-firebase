@@ -39,7 +39,11 @@ class News {
         categories = json['category'][0] ?? 'No Categories', //multiple data
         fullDescription = json['full_description'] ?? 'No Full Description',
         isSaved = false,
-        id = uuid.v4();
+        id = json['title']
+            .toString()
+            .trim()
+            .substring(0, 15)
+            .replaceAll(' ', '');
 
   factory News.initial() => News(
         title: '',
