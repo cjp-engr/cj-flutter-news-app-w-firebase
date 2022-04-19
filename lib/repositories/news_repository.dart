@@ -14,9 +14,9 @@ class NewsRepository {
       List<News>? latestNews = await newsApiServices.getLatestNews();
       return latestNews;
     } on NewsException catch (e) {
-      throw CustomError(errMsg: e.message);
+      throw CustomError(message: e.message);
     } catch (e) {
-      throw CustomError(errMsg: e.toString());
+      throw CustomError(message: e.toString());
     }
   }
 
@@ -26,9 +26,9 @@ class NewsRepository {
           await newsApiServices.getNewsByCategory(category);
       return latestNews;
     } on NewsException catch (e) {
-      throw CustomError(errMsg: e.message);
+      throw CustomError(message: e.message);
     } catch (e) {
-      throw CustomError(errMsg: e.toString());
+      throw CustomError(message: e.toString());
     }
   }
 }

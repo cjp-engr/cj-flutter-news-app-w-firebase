@@ -36,36 +36,33 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
         _savedAllNewsList = activeCategoryBloc.state.allCategoriesnewsList
             .where((News news) => news.isSaved! == true)
             .toList();
-
         break;
       case Categories.business:
         _savedBusinessNewsList = activeCategoryBloc
             .state.businessCategoriesnewsList
             .where((News news) => news.isSaved! == true)
             .toList();
-
         break;
       case Categories.entertainment:
         _savedEntertainmentNewsList = activeCategoryBloc
             .state.entertainmentCategoriesnewsList
             .where((News news) => news.isSaved! == true)
             .toList();
-
         break;
       case Categories.environment:
         _savedEnvironmentNewsList = activeCategoryBloc
             .state.environmentCategoriesnewsList
             .where((News news) => news.isSaved! == true)
             .toList();
-
         break;
     }
-    _savedNews = [
+    _savedNews = {
       ..._savedAllNewsList,
       ..._savedBusinessNewsList,
       ..._savedEntertainmentNewsList,
       ..._savedEnvironmentNewsList,
-    ];
+    }.toList();
+
     add(GetSavedNewsEvent(savedNewsList: _savedNews));
   }
 

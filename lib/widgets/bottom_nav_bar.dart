@@ -10,6 +10,7 @@ import 'package:news_app_with_firebase/pages/profile_page.dart';
 import 'package:news_app_with_firebase/pages/saved_page.dart';
 
 class BottomNavBar extends StatelessWidget {
+  static const String routeName = '/bottomnav';
   final int _page = 2;
   static const List<Widget> _widgetOptions = <Widget>[
     SavedPage(),

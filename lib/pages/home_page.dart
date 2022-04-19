@@ -8,6 +8,7 @@ import 'package:news_app_with_firebase/widgets/homepage/latest_news_section.dart
 import 'package:news_app_with_firebase/widgets/homepage/other_categories_screen.dart';
 
 class HomePage extends StatelessWidget {
+  static const String routeName = '/home';
   const HomePage({Key? key}) : super(key: key);
 
   @override

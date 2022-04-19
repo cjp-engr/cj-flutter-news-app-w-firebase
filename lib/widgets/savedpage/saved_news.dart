@@ -17,6 +17,7 @@ class SavedNews extends StatelessWidget {
         itemCount: savedNewsList.length,
         itemBuilder: (BuildContext context, int index) {
           var nList = savedNewsList.elementAt(index);
+
           return OpenContainer<bool>(
             openBuilder: (_, VoidCallback openContainer) {
               return ArticleSection(

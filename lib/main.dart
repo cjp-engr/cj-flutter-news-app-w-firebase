@@ -1,7 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
+import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
 import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
+import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
+import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
+import 'package:news_app_with_firebase/firebase_options.dart';
+import 'package:news_app_with_firebase/pages/home_page.dart';
+import 'package:news_app_with_firebase/pages/signin_page.dart';
+import 'package:news_app_with_firebase/pages/signup_page.dart';
+import 'package:news_app_with_firebase/pages/splash_page.dart';
+import 'package:news_app_with_firebase/repositories/auth_repository.dart';
 import 'package:news_app_with_firebase/repositories/news_repository.dart';
 import 'package:news_app_with_firebase/services/news_api_services.dart';
 import 'package:news_app_with_firebase/widgets/bottom_nav_bar.dart';
@@ -9,7 +21,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/scheduler.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -20,12 +36,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     timeDilation = 3;
-    return RepositoryProvider(
-      create: (context) => NewsRepository(
-        newsApiServices: NewsApiServices(
-          httpClient: http.Client(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => NewsRepository(
+            newsApiServices: NewsApiServices(
+              httpClient: http.Client(),
+            ),
+          ),
         ),
-      ),
+        RepositoryProvider<AuthRepository>(
+          create: (context) => AuthRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+            firebaseAuth: FirebaseAuth.instance,
+          ),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider<ActiveCategoryBloc>(
@@ -39,6 +65,21 @@ class MyApp extends StatelessWidget {
           BlocProvider<SavedNewsBloc>(
             create: (context) => SavedNewsBloc(
               activeCategoryBloc: BlocProvider.of<ActiveCategoryBloc>(context),
+            ),
+          ),
+          BlocProvider<AuthBloc>(
+            create: (context) => AuthBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider<SigninCubit>(
+            create: (context) => SigninCubit(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider<SignupCubit>(
+            create: (context) => SignupCubit(
+              authRepository: context.read<AuthRepository>(),
             ),
           ),
         ],
@@ -84,25 +125,6 @@ class MyApp extends StatelessWidget {
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-                // backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                //   (Set<MaterialState> states) {
-                //     if (states.contains(MaterialState.pressed)) {
-                //       return Theme.of(context)
-                //           .colorScheme
-                //           .primary
-                //           .withOpacity(0.5);
-                //     } else if (states.contains(MaterialState.disabled)) {
-                //       return Theme.of(context)
-                //           .colorScheme
-                //           .primary
-                //           .withOpacity(0.5);
-                //     }
-                //     return Theme.of(context)
-                //         .colorScheme
-                //         .primary
-                //         .withOpacity(0.5);
-                //   },
-                // ),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -113,7 +135,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
           //home: const MyHomePage(),
-          home: BottomNavBar(),
+          home: const SplashPage(),
+          routes: {
+            SignupPage.routeName: (context) => const SignupPage(),
+            SigninPage.routeName: (context) => const SigninPage(),
+            HomePage.routeName: (context) => const HomePage(),
+            BottomNavBar.routeName: (context) => BottomNavBar(),
+          },
         ),
       ),
     );

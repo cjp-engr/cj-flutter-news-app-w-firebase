@@ -1,7 +1,3 @@
-import 'package:uuid/uuid.dart';
-
-Uuid uuid = const Uuid();
-
 class News {
   final String? title;
   final List<dynamic>? creators;
@@ -42,7 +38,7 @@ class News {
         id = json['title']
             .toString()
             .trim()
-            .substring(0, 15)
+            .substring(0, 25)
             .replaceAll(' ', '');
 
   factory News.initial() => News(
