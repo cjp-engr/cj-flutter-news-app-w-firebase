@@ -51,7 +51,6 @@ class ActiveCategoryBloc
         return news;
       },
     ).toList();
-
     emit(state.copyWith(
       loadingStatus: NewsLoadingStatus.loaded,
       allCategoriesnewsList: togNews,

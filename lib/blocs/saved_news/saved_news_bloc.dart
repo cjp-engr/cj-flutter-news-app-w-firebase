@@ -18,50 +18,84 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
   }) : super(SavedNewsState.initial()) {
     activeCategorySubscription = activeCategoryBloc.stream
         .listen((ActiveCategoryState activeCategoryState) {
-      filterSavedAllCategoriesNews();
+      addSavedAllCategoriesNews();
     });
     on<GetSavedNewsEvent>((event, emit) {
       emit(state.copyWith(newsSaved: event.savedNewsList));
     });
+    on<ToggleSavedNewsEvent>(_toggleSavedNews);
   }
-  void filterSavedAllCategoriesNews() {
+
+  void _toggleSavedNews(
+      ToggleSavedNewsEvent event, Emitter<SavedNewsState> emit) {
+    final togNews = state.newsSaved.map(
+      (News news) {
+        if (event.id == news.id) {
+          return News(
+            title: news.title,
+            creators: news.creators,
+            description: news.description,
+            content: news.content,
+            publishedDate: news.publishedDate,
+            imageUrl: news.imageUrl,
+            countries: news.countries,
+            categories: news.categories,
+            fullDescription: news.fullDescription,
+            id: news.id,
+            isSaved: !news.isSaved!,
+          );
+        }
+        return news;
+      },
+    ).toList();
+
+    emit(state.copyWith(newsSaved: togNews));
+  }
+
+  void addSavedAllCategoriesNews() {
     var _savedNews = <News>[];
     List<News> _savedAllNewsList = [];
-    List<News> _savedBusinessNewsList = [];
-    List<News> _savedEntertainmentNewsList = [];
-    List<News> _savedEnvironmentNewsList = [];
 
     switch (activeCategoryBloc.state.activeCategory) {
       case Categories.all:
         _savedAllNewsList = activeCategoryBloc.state.allCategoriesnewsList
-            .where((News news) => news.isSaved! == true)
+            .where((News news) => news.isSaved!)
             .toList();
+        _savedNews = {
+          ...state.newsSaved,
+          ..._savedAllNewsList,
+        }.toList();
         break;
       case Categories.business:
-        _savedBusinessNewsList = activeCategoryBloc
-            .state.businessCategoriesnewsList
-            .where((News news) => news.isSaved! == true)
+        _savedAllNewsList = activeCategoryBloc.state.businessCategoriesnewsList
+            .where((News news) => news.isSaved!)
             .toList();
+        _savedNews = {
+          ...state.newsSaved,
+          ..._savedAllNewsList,
+        }.toList();
         break;
       case Categories.entertainment:
-        _savedEntertainmentNewsList = activeCategoryBloc
+        _savedAllNewsList = activeCategoryBloc
             .state.entertainmentCategoriesnewsList
-            .where((News news) => news.isSaved! == true)
+            .where((News news) => news.isSaved!)
             .toList();
+        _savedNews = {
+          ...state.newsSaved,
+          ..._savedAllNewsList,
+        }.toList();
         break;
       case Categories.environment:
-        _savedEnvironmentNewsList = activeCategoryBloc
+        _savedAllNewsList = activeCategoryBloc
             .state.environmentCategoriesnewsList
-            .where((News news) => news.isSaved! == true)
+            .where((News news) => news.isSaved!)
             .toList();
+        _savedNews = {
+          ...state.newsSaved,
+          ..._savedAllNewsList,
+        }.toList();
         break;
     }
-    _savedNews = {
-      ..._savedAllNewsList,
-      ..._savedBusinessNewsList,
-      ..._savedEntertainmentNewsList,
-      ..._savedEnvironmentNewsList,
-    }.toList();
 
     add(GetSavedNewsEvent(savedNewsList: _savedNews));
   }

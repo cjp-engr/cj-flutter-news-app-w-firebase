@@ -13,3 +13,10 @@ class GetSavedNewsEvent extends SavedNewsEvent {
     required this.savedNewsList,
   });
 }
+
+class ToggleSavedNewsEvent extends SavedNewsEvent {
+  final String id;
+  const ToggleSavedNewsEvent({
+    required this.id,
+  });
+}
