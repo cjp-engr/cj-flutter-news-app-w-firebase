@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
-import 'package:news_app_with_firebase/pages/home_page.dart';
 import 'package:news_app_with_firebase/pages/signin_page.dart';
 import 'package:news_app_with_firebase/widgets/bottom_nav_bar.dart';
 

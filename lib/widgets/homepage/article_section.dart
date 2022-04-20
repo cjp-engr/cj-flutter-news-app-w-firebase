@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
-import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:news_app_with_firebase/utils/list_of_categories.dart';

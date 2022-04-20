@@ -10,15 +10,15 @@ enum SignupStatus {
 class SignupState extends Equatable {
   final SignupStatus signupStatus;
   final CustomError error;
-  SignupState({
+  const SignupState({
     required this.signupStatus,
     required this.error,
   });
 
   factory SignupState.initial() {
-    return SignupState(
+    return const SignupState(
       signupStatus: SignupStatus.initial,
-      error: const CustomError(),
+      error: CustomError(),
     );
   }
 
