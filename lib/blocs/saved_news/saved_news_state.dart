@@ -1,31 +1,43 @@
 part of 'saved_news_bloc.dart';
 
 class SavedNewsState extends Equatable {
-  final List<News> newsSaved;
-
+  final List<News> savedNews;
+  final List<String> id;
+  final bool isSaved;
   const SavedNewsState({
-    required this.newsSaved,
+    required this.savedNews,
+    required this.id,
+    required this.isSaved,
   });
 
   factory SavedNewsState.initial() {
     return const SavedNewsState(
-      newsSaved: [],
+      savedNews: [],
+      id: [],
+      isSaved: false,
     );
   }
 
   @override
   List<Object?> get props => [
-        newsSaved,
+        savedNews,
+        id,
+        isSaved,
       ];
 
   @override
-  String toString() => 'SavedNewsState(newsSaved: $newsSaved, )';
+  String toString() =>
+      'SavedNewsState(savedNews: $savedNews, id: $id, isSaved: $isSaved)';
 
   SavedNewsState copyWith({
-    List<News>? newsSaved,
+    List<News>? savedNews,
+    List<String>? id,
+    bool? isSaved,
   }) {
     return SavedNewsState(
-      newsSaved: newsSaved ?? this.newsSaved,
+      savedNews: savedNews ?? this.savedNews,
+      id: id ?? this.id,
+      isSaved: isSaved ?? this.isSaved,
     );
   }
 }

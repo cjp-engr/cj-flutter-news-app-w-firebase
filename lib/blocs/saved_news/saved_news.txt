@@ -1,0 +1,17 @@
+    // final newsList = state.savedNews.map((News news) {
+    //   if (news.id == event.savedNews.id) {
+    //     return News(
+    //       title: news.title,
+    //       creators: news.creators,
+    //       description: news.description,
+    //       content: news.content,
+    //       publishedDate: news.publishedDate,
+    //       imageUrl: news.imageUrl,
+    //       countries: news.countries,
+    //       categories: news.categories,
+    //       fullDescription: news.fullDescription,
+    //       isSaved: news.isSaved,
+    //       id: news.id,
+    //     );
+    //   }
+    // });

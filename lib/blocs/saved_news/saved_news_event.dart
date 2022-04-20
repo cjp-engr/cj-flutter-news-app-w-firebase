@@ -7,16 +7,18 @@ abstract class SavedNewsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetSavedNewsEvent extends SavedNewsEvent {
-  final List<News> savedNewsList;
-  const GetSavedNewsEvent({
-    required this.savedNewsList,
+class AddSavedNewsEvent extends SavedNewsEvent {
+  final News savedNews;
+  const AddSavedNewsEvent({
+    required this.savedNews,
   });
 }
 
-class ToggleSavedNewsEvent extends SavedNewsEvent {
-  final String id;
-  const ToggleSavedNewsEvent({
-    required this.id,
+class IsSavedNewsEvent extends SavedNewsEvent {
+  final bool isSaved;
+  final News savedNews;
+  const IsSavedNewsEvent({
+    required this.isSaved,
+    required this.savedNews,
   });
 }

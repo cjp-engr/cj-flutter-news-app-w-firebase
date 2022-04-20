@@ -10,7 +10,7 @@ class SavedNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final savedNewsList = context.watch<SavedNewsBloc>().state.newsSaved;
+    final savedNewsList = context.watch<SavedNewsBloc>().state.savedNews;
 
     return Expanded(
       child: ListView.separated(

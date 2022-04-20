@@ -57,15 +57,13 @@ class MyApp extends StatelessWidget {
           BlocProvider<ActiveCategoryBloc>(
             create: (context) => ActiveCategoryBloc(
               newsRepository: RepositoryProvider.of<NewsRepository>(context),
-            )..add(FetchLatestNewsEvent()),
+            )..add(FetchInitialNewsEvent()),
           ),
           BlocProvider<BottomNavBarBloc>(
             create: (context) => BottomNavBarBloc(),
           ),
           BlocProvider<SavedNewsBloc>(
-            create: (context) => SavedNewsBloc(
-              activeCategoryBloc: BlocProvider.of<ActiveCategoryBloc>(context),
-            ),
+            create: (context) => SavedNewsBloc(),
           ),
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(

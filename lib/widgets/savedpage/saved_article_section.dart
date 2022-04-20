@@ -30,26 +30,11 @@ class SavedArticleSection extends StatelessWidget {
             onPressed: () {},
           ),
           IconButton(
-            icon: BlocBuilder<SavedNewsBloc, SavedNewsState>(
-              builder: (_, state) {
-                if (state.newsSaved[index].isSaved!) {
-                  return const Icon(
-                    Icons.bookmark_border_outlined,
-                    size: 30,
-                  );
-                } else {
-                  return const Icon(
-                    Icons.bookmark,
-                    size: 30,
-                  );
-                }
-              },
+            icon: const Icon(
+              Icons.bookmark,
+              size: 30,
             ),
-            onPressed: () {
-              context
-                  .read<SavedNewsBloc>()
-                  .add(ToggleSavedNewsEvent(id: news.id));
-            },
+            onPressed: () {},
           ),
         ],
       ),

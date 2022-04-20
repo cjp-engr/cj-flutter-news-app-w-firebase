@@ -9,7 +9,7 @@ class News {
   final String? categories;
   final String? fullDescription;
   final bool? isSaved;
-  String id;
+  final String? id;
   News({
     this.title,
     this.creators,
@@ -21,7 +21,7 @@ class News {
     this.categories,
     this.fullDescription,
     this.isSaved,
-    required this.id,
+    this.id,
   });
 
   News.fromJson(Map<String, dynamic> json)
