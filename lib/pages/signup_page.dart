@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
-import 'package:news_app_with_firebase/utils/error_dialog.dart';
+import 'package:news_app_with_firebase/utils/user_error_dialog.dart';
 import 'package:validators/validators.dart';
 
 class SignupPage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _SignupPageState extends State<SignupPage> {
 
     form.save();
 
-    print('name: $_name, email: $_email, password: $_password');
+    //print('name: $_name, email: $_email, password: $_password');
 
     context.read<SignupCubit>().signup(
           name: _name!,
@@ -46,7 +46,7 @@ class _SignupPageState extends State<SignupPage> {
       child: BlocConsumer<SignupCubit, SignupState>(
         listener: (context, state) {
           if (state.signupStatus == SignupStatus.error) {
-            print('signup error');
+            //print('signup error');
             errorDialog(context, state.error);
           }
         },

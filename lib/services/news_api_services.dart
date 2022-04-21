@@ -13,7 +13,7 @@ class NewsApiServices {
   Future<List<News>?> getLatestNews() async {
     final Uri uri = Uri(
       scheme: 'https',
-      host: kHost,
+      host: kNewsHost,
       path: '/api/1/news',
       queryParameters: {
         'apikey': apiKey,
@@ -43,7 +43,7 @@ class NewsApiServices {
   Future<List<News>?> getNewsByCategory(String category) async {
     final Uri uri = Uri(
       scheme: 'https',
-      host: kHost,
+      host: kNewsHost,
       path: '/api/1/news',
       queryParameters: {
         'apikey': apiKey,

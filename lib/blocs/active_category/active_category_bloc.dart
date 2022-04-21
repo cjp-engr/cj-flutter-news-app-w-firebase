@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:news_app_with_firebase/models/custom_error.dart';
+import 'package:news_app_with_firebase/models/user_custom_error.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:news_app_with_firebase/repositories/news_repository.dart';
 import 'package:news_app_with_firebase/utils/list_of_categories.dart';
@@ -62,6 +62,7 @@ class ActiveCategoryBloc
         }
       } else if (Categories.business == event.activeCategory) {
         if (state.businessCategoriesnewsList.isEmpty) {
+          emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
           final List<News>? newsList = await newsRepository
               .fetchNewsByCategory(Categories.business.name);
           emit(state.copyWith(
@@ -78,6 +79,7 @@ class ActiveCategoryBloc
         }
       } else if (Categories.entertainment == event.activeCategory) {
         if (state.entertainmentCategoriesnewsList.isEmpty) {
+          emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
           final List<News>? newsList = await newsRepository
               .fetchNewsByCategory(Categories.entertainment.name);
           emit(state.copyWith(
@@ -95,6 +97,7 @@ class ActiveCategoryBloc
         }
       } else if (Categories.environment == event.activeCategory) {
         if (state.environmentCategoriesnewsList.isEmpty) {
+          emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
           final List<News>? newsList = await newsRepository
               .fetchNewsByCategory(Categories.environment.name);
           emit(state.copyWith(

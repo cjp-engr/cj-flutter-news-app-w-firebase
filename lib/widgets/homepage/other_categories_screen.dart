@@ -190,7 +190,7 @@ class OtherCategoriesScreen extends StatelessWidget {
 
   Widget _creators(BuildContext context, List<dynamic> authors) {
     for (var creator in authors) {
-      String auth = creator.toString().trim().replaceAll(',', '\n');
+      String author = creator.toString().trim().replaceAll(',', '\n');
       return Padding(
         padding: const EdgeInsets.all(5),
         child: Container(
@@ -204,10 +204,10 @@ class OtherCategoriesScreen extends StatelessWidget {
                 const EdgeInsets.only(top: 7, bottom: 7, left: 10, right: 10),
             child: Text(
               authors[0].toString().trim().contains(',')
-                  ? auth
-                  : auth.trim().length < 15
-                      ? auth
-                      : auth.substring(0, auth.indexOf(' ') + 2) + '.',
+                  ? author
+                  : author.trim().length < 15
+                      ? author
+                      : author.substring(0, author.indexOf(' ') + 2) + '.',
               style: Theme.of(context).textTheme.caption!.merge(
                     const TextStyle(
                       color: Colors.white,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
 import 'package:news_app_with_firebase/pages/signup_page.dart';
-import 'package:news_app_with_firebase/utils/error_dialog.dart';
+import 'package:news_app_with_firebase/utils/user_error_dialog.dart';
 import 'package:validators/validators.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +29,7 @@ class _SigninPageState extends State<SigninPage> {
 
     form.save();
 
-    print('email: $_email, password: $_password');
+    //print('email: $_email, password: $_password');
 
     context.read<SigninCubit>().signin(email: _email!, password: _password!);
   }

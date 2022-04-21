@@ -17,8 +17,8 @@ class SplashPage extends StatelessWidget {
             context,
             SigninPage.routeName,
             (route) {
-              print('route.settings.name: ${route.settings.name}');
-              print('ModalRoute: ${ModalRoute.of(context)!.settings.name}');
+              //print('route.settings.name: ${route.settings.name}');
+              //print('ModalRoute: ${ModalRoute.of(context)!.settings.name}');
 
               return route.settings.name ==
                       ModalRoute.of(context)!.settings.name

@@ -8,6 +8,8 @@ import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.
 import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
 import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
 import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
+import 'package:news_app_with_firebase/blocs/temp_settings/temp_settings_bloc.dart';
+import 'package:news_app_with_firebase/blocs/weather/weather_bloc.dart';
 import 'package:news_app_with_firebase/firebase_options.dart';
 import 'package:news_app_with_firebase/pages/home_page.dart';
 import 'package:news_app_with_firebase/pages/signin_page.dart';
@@ -15,7 +17,9 @@ import 'package:news_app_with_firebase/pages/signup_page.dart';
 import 'package:news_app_with_firebase/pages/splash_page.dart';
 import 'package:news_app_with_firebase/repositories/auth_repository.dart';
 import 'package:news_app_with_firebase/repositories/news_repository.dart';
+import 'package:news_app_with_firebase/repositories/weather_repository.dart';
 import 'package:news_app_with_firebase/services/news_api_services.dart';
+import 'package:news_app_with_firebase/services/weather_api_services.dart';
 import 'package:news_app_with_firebase/widgets/bottom_nav_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -51,6 +55,13 @@ class MyApp extends StatelessWidget {
             firebaseAuth: FirebaseAuth.instance,
           ),
         ),
+        RepositoryProvider(
+          create: (context) => WeatherRepository(
+            weatherApiServices: WeatherApiServices(
+              httpClient: http.Client(),
+            ),
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -79,6 +90,14 @@ class MyApp extends StatelessWidget {
             create: (context) => SignupCubit(
               authRepository: context.read<AuthRepository>(),
             ),
+          ),
+          BlocProvider<WeatherBloc>(
+            create: (context) => WeatherBloc(
+              weatherRepository: context.read<WeatherRepository>(),
+            ),
+          ),
+          BlocProvider<TempSettingsBloc>(
+            create: (context) => TempSettingsBloc(),
           ),
         ],
         child: MaterialApp(

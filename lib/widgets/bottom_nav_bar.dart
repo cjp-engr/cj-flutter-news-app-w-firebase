@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import 'package:news_app_with_firebase/pages/categories_page.dart';
 import 'package:news_app_with_firebase/pages/home_page.dart';
-import 'package:news_app_with_firebase/pages/notifications_page.dart';
+import 'package:news_app_with_firebase/pages/weather_page.dart';
 import 'package:news_app_with_firebase/pages/profile_page.dart';
 import 'package:news_app_with_firebase/pages/saved_page.dart';
 
@@ -16,7 +15,7 @@ class BottomNavBar extends StatelessWidget {
     SavedPage(),
     CategoriesPage(),
     HomePage(),
-    NotificationsPage(),
+    WeatherPage(),
     ProfilePage(),
   ];
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
@@ -31,11 +30,11 @@ class BottomNavBar extends StatelessWidget {
         index: _page,
         height: 75.0,
         items: const <Widget>[
-          FaIcon(FontAwesomeIcons.solidBookmark, size: 30),
-          FaIcon(FontAwesomeIcons.box, size: 30),
-          FaIcon(FontAwesomeIcons.houseChimneyUser, size: 30),
-          FaIcon(FontAwesomeIcons.bellConcierge, size: 30),
-          FaIcon(FontAwesomeIcons.userLarge, size: 30),
+          Icon(Icons.bookmark, size: 30),
+          Icon(Icons.category, size: 30),
+          Icon(Icons.house, size: 30),
+          Icon(Icons.wb_sunny, size: 30),
+          Icon(Icons.person, size: 30),
         ],
         color: Colors.white,
         buttonBackgroundColor: Colors.indigoAccent,

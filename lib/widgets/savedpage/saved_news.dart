@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
-import 'package:news_app_with_firebase/widgets/savedpage/saved_article_section.dart';
+import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
 
 class SavedNews extends StatelessWidget {
   const SavedNews({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class SavedNews extends StatelessWidget {
 
           return OpenContainer<bool>(
             openBuilder: (_, VoidCallback openContainer) {
-              return SavedArticleSection(
+              return ArticleSection(
                 news: nList,
                 index: index,
               );

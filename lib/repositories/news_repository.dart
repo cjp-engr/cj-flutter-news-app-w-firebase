@@ -1,5 +1,5 @@
 import 'package:news_app_with_firebase/exceptions/news_exception.dart';
-import 'package:news_app_with_firebase/models/custom_error.dart';
+import 'package:news_app_with_firebase/models/user_custom_error.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:news_app_with_firebase/services/news_api_services.dart';
 
