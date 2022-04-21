@@ -3,7 +3,7 @@ part of 'saved_news_bloc.dart';
 class SavedNewsState extends Equatable {
   final List<News> savedNews;
   final List<String> id;
-  final bool isSaved;
+  final Map<String, bool> isSaved;
   const SavedNewsState({
     required this.savedNews,
     required this.id,
@@ -14,7 +14,7 @@ class SavedNewsState extends Equatable {
     return const SavedNewsState(
       savedNews: [],
       id: [],
-      isSaved: false,
+      isSaved: {'mytest': false},
     );
   }
 
@@ -32,7 +32,7 @@ class SavedNewsState extends Equatable {
   SavedNewsState copyWith({
     List<News>? savedNews,
     List<String>? id,
-    bool? isSaved,
+    Map<String, bool>? isSaved,
   }) {
     return SavedNewsState(
       savedNews: savedNews ?? this.savedNews,

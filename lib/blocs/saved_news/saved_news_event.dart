@@ -13,12 +13,3 @@ class AddSavedNewsEvent extends SavedNewsEvent {
     required this.savedNews,
   });
 }
-
-class IsSavedNewsEvent extends SavedNewsEvent {
-  final bool isSaved;
-  final News savedNews;
-  const IsSavedNewsEvent({
-    required this.isSaved,
-    required this.savedNews,
-  });
-}

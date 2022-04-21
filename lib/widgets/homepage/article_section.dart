@@ -19,7 +19,6 @@ class ArticleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final savedNews = context.watch<SavedNewsBloc>().state.isSaved;
     return Scaffold(
       appBar: AppBar(
         title: Text(news.categories!),
@@ -34,21 +33,23 @@ class ArticleSection extends StatelessWidget {
           IconButton(
             icon: BlocBuilder<SavedNewsBloc, SavedNewsState>(
               builder: (context, state) {
-                return state.isSaved
-                    ? const Icon(
-                        Icons.bookmark,
-                        size: 30,
-                      )
-                    : const Icon(
-                        Icons.bookmark_border_outlined,
-                        size: 30,
-                      );
+                if (state.id.contains(news.id)) {
+                  return const Icon(
+                    Icons.bookmark,
+                    size: 30,
+                  );
+                } else {
+                  return const Icon(
+                    Icons.bookmark_border_outlined,
+                    size: 30,
+                  );
+                }
               },
             ),
             onPressed: () {
               context
                   .read<SavedNewsBloc>()
-                  .add(IsSavedNewsEvent(isSaved: !savedNews, savedNews: news));
+                  .add(AddSavedNewsEvent(savedNews: news));
             },
           ),
         ],

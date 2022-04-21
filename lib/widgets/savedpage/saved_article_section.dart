@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-
 import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
+
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 
@@ -30,11 +30,26 @@ class SavedArticleSection extends StatelessWidget {
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(
-              Icons.bookmark,
-              size: 30,
+            icon: BlocBuilder<SavedNewsBloc, SavedNewsState>(
+              builder: (context, state) {
+                if (state.id.contains(news.id)) {
+                  return const Icon(
+                    Icons.bookmark,
+                    size: 30,
+                  );
+                } else {
+                  return const Icon(
+                    Icons.bookmark_border_outlined,
+                    size: 30,
+                  );
+                }
+              },
             ),
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read<SavedNewsBloc>()
+                  .add(AddSavedNewsEvent(savedNews: news));
+            },
           ),
         ],
       ),
