@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/widgets/savedpage/saved_news.dart';
 
 class SavedPage extends StatelessWidget {
@@ -9,8 +10,11 @@ class SavedPage extends StatelessWidget {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: const Text('Welcome back, Carmen'),
+          backgroundColor: themeLightColor2,
+          title: Text(
+            'Saved News',
+            style: TextStyle(color: themeLightColor1),
+          ),
         ),
         body: Column(
           children: const [

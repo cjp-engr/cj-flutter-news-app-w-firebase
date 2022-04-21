@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
 import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
+import 'package:news_app_with_firebase/blocs/profile/profile_cubit.dart';
 import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
 import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
 import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
@@ -17,6 +18,7 @@ import 'package:news_app_with_firebase/pages/signup_page.dart';
 import 'package:news_app_with_firebase/pages/splash_page.dart';
 import 'package:news_app_with_firebase/repositories/auth_repository.dart';
 import 'package:news_app_with_firebase/repositories/news_repository.dart';
+import 'package:news_app_with_firebase/repositories/profile_repository.dart';
 import 'package:news_app_with_firebase/repositories/weather_repository.dart';
 import 'package:news_app_with_firebase/services/news_api_services.dart';
 import 'package:news_app_with_firebase/services/weather_api_services.dart';
@@ -62,6 +64,11 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        RepositoryProvider<ProfileRepository>(
+          create: (context) => ProfileRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -98,6 +105,11 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<TempSettingsBloc>(
             create: (context) => TempSettingsBloc(),
+          ),
+          BlocProvider<ProfileCubit>(
+            create: (context) => ProfileCubit(
+              profileRepository: context.read<ProfileRepository>(),
+            ),
           ),
         ],
         child: MaterialApp(
@@ -144,7 +156,7 @@ class MyApp extends StatelessWidget {
               style: ButtonStyle(
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
                 elevation: MaterialStateProperty.all(10),

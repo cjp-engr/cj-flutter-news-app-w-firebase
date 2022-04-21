@@ -98,7 +98,7 @@ class OtherCategoriesScreen extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(
             color: Colors.white,
-            height: 15,
+            height: 10,
           );
         },
       ),

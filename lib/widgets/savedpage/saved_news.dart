@@ -29,28 +29,31 @@ class SavedNews extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.all(10),
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: Column(
                     children: [
                       Stack(
                         children: [
                           _image(context, nList.imageUrl),
                           _title(context, nList.title),
-                          _country(context, nList.countries!),
+                          //_country(context, nList.countries!),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Flexible(
-                            child: _creators(context, nList.creators!),
-                          ),
-                          Flexible(
-                            child:
-                                _publishedDate(context, nList.publishedDate!),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   mainAxisSize: MainAxisSize.max,
+                      //   children: [
+                      //     Flexible(
+                      //       child: _creators(context, nList.creators!),
+                      //     ),
+                      //     Flexible(
+                      //       child:
+                      //           _publishedDate(context, nList.publishedDate!),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
@@ -70,10 +73,7 @@ class SavedNews extends StatelessWidget {
 
   Widget _image(BuildContext context, String? imageUrl) {
     return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(20),
-        topRight: Radius.circular(20),
-      ),
+      borderRadius: BorderRadius.circular(10),
       child: Image.network(
         imageUrl!,
         width: double.infinity,
@@ -114,22 +114,25 @@ class SavedNews extends StatelessWidget {
 
   Widget _title(BuildContext context, String? title) {
     return Positioned(
-      bottom: 0,
-      left: 0,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.1,
-          child: Text(
-            title!.trim().length < 60
-                ? title.trim()
-                : title.trim().substring(0, 60) + '...',
-            style: Theme.of(context).textTheme.bodyText2!.merge(
-                  const TextStyle(
-                    color: Colors.white,
+      // bottom: 0,
+      // left: 0,
+      child: Align(
+        alignment: FractionalOffset.bottomRight,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width / 1.1,
+            child: Text(
+              title!.trim().length < 60
+                  ? title.trim()
+                  : title.trim().substring(0, 70) + '...',
+              style: Theme.of(context).textTheme.subtitle1!.merge(
+                    const TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-            softWrap: true,
+              softWrap: true,
+            ),
           ),
         ),
       ),
