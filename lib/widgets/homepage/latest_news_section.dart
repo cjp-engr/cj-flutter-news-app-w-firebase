@@ -136,8 +136,13 @@ class LatestNewsSection extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: themeLightColor4,
-              border: Border.all(color: themeLightColor4),
-              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: themeLightColor1),
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(15),
+                bottomLeft: Radius.circular(5),
+                topLeft: Radius.circular(5),
+                topRight: Radius.circular(5),
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(10),
@@ -167,8 +172,13 @@ class LatestNewsSection extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: themeLightColor4,
-                border: Border.all(color: themeLightColor4),
-                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: themeLightColor1),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(5),
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10),

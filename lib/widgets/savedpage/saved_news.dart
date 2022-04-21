@@ -125,7 +125,7 @@ class SavedNews extends StatelessWidget {
             child: Text(
               title!.trim().length < 60
                   ? title.trim()
-                  : title.trim().substring(0, 70) + '...',
+                  : title.trim().substring(0, 55) + '...',
               style: Theme.of(context).textTheme.subtitle1!.merge(
                     const TextStyle(
                       color: Colors.white,

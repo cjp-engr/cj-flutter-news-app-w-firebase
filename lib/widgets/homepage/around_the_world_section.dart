@@ -136,8 +136,13 @@ class AroundTheWorldSection extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: themeLightColor4,
-              border: Border.all(color: themeLightColor4),
-              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: themeLightColor1),
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(15),
+                topLeft: Radius.circular(5),
+                bottomRight: Radius.circular(5),
+                bottomLeft: Radius.circular(5),
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(10),

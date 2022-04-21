@@ -17,7 +17,7 @@ class NewsApiServices {
       path: '/api/1/news',
       queryParameters: {
         'apikey': apiKey,
-        'country': 'ph',
+        'country': 'th',
         'language': 'en',
       },
     );

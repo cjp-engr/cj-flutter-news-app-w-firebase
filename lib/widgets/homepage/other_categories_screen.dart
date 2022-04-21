@@ -62,7 +62,7 @@ class OtherCategoriesScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border(
-                        left: BorderSide(color: themeLightColor4, width: 5),
+                        left: BorderSide(color: themeLightColor4, width: 10),
                       ),
                     ),
                     child: Column(
@@ -156,16 +156,19 @@ class OtherCategoriesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1.1,
-          child: Text(
-            title!.trim().length < 60
-                ? title.trim()
-                : title.trim().substring(0, 60) + '...',
-            style: Theme.of(context).textTheme.bodyText2!.merge(
-                  TextStyle(
-                    color: themeLightColor1,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Text(
+              title!.trim(),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyText2!.merge(
+                    TextStyle(
+                      color: themeLightColor1,
+                    ),
                   ),
-                ),
-            softWrap: true,
+              softWrap: true,
+            ),
           ),
         ),
       ),
@@ -181,8 +184,13 @@ class OtherCategoriesScreen extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: themeLightColor4,
-              border: Border.all(color: themeLightColor4),
-              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: themeLightColor1),
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(20),
+                topLeft: Radius.circular(5),
+                bottomRight: Radius.circular(5),
+                bottomLeft: Radius.circular(5),
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(10),
@@ -209,8 +217,8 @@ class OtherCategoriesScreen extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: themeLightColor4,
-            border: Border.all(color: themeLightColor4),
-            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: themeLightColor1),
+            borderRadius: BorderRadius.circular(5),
           ),
           child: Padding(
             padding:
@@ -243,8 +251,13 @@ class OtherCategoriesScreen extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: themeLightColor4,
-          border: Border.all(color: themeLightColor4),
-          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: themeLightColor1),
+          borderRadius: const BorderRadius.only(
+            bottomRight: Radius.circular(20),
+            bottomLeft: Radius.circular(5),
+            topRight: Radius.circular(5),
+            topLeft: Radius.circular(5),
+          ),
         ),
         child: Padding(
           padding:

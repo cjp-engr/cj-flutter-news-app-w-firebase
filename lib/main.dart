@@ -126,15 +126,15 @@ class MyApp extends StatelessWidget {
               ),
               headline5: TextStyle(
                 fontSize: 28.0,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
               ),
               headline6: TextStyle(
                 fontSize: 26.5,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
               ),
               subtitle1: TextStyle(
                 fontSize: 25.0,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
               ),
               subtitle2: TextStyle(
                 fontSize: 23.0,
@@ -142,15 +142,18 @@ class MyApp extends StatelessWidget {
               ),
               bodyText1: TextStyle(
                 fontSize: 21.0,
+                fontWeight: FontWeight.w300,
               ),
               bodyText2: TextStyle(
                 fontSize: 19.0,
+                fontWeight: FontWeight.w300,
               ),
               caption: TextStyle(
                 fontSize: 19.0,
+                fontWeight: FontWeight.w300,
               ),
             ).apply(
-              fontFamily: 'ABeeZee',
+              fontFamily: 'Poppins',
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(

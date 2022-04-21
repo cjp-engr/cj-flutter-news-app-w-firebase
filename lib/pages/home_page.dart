@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: themeLightColor2,
           title: Text(
-            'Welcome back, manggagamit',
+            'News',
             style: TextStyle(color: themeLightColor1),
           ),
         ),
