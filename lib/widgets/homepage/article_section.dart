@@ -24,24 +24,17 @@ class ArticleSection extends StatelessWidget {
         title: Text(news.categories!),
         actions: [
           IconButton(
-            icon: const FaIcon(
-              FontAwesomeIcons.font,
-              size: 30,
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
             icon: BlocBuilder<SavedNewsBloc, SavedNewsState>(
               builder: (context, state) {
                 if (state.id.contains(news.id)) {
                   return const Icon(
                     Icons.bookmark,
-                    size: 30,
+                    size: 40,
                   );
                 } else {
                   return const Icon(
                     Icons.bookmark_border_outlined,
-                    size: 30,
+                    size: 40,
                   );
                 }
               },
@@ -51,6 +44,13 @@ class ArticleSection extends StatelessWidget {
                   .read<SavedNewsBloc>()
                   .add(AddSavedNewsEvent(savedNews: news));
             },
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
+              size: 40,
+            ),
+            onPressed: () {},
           ),
         ],
       ),

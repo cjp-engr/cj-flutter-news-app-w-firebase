@@ -28,10 +28,13 @@ class ActiveCategoryBloc
     try {
       if (state.allCategoriesnewsList.isEmpty) {
         emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
-        final List<News>? newsList = await newsRepository.fetchNewsList();
+        final List<News>? latestList = await newsRepository.fetchNewsList();
+        final List<News>? aroundList =
+            await newsRepository.fetchAroundTheNewsList();
         emit(state.copyWith(
             loadingStatus: NewsLoadingStatus.loaded,
-            allCategoriesnewsList: newsList));
+            allCategoriesnewsList: latestList,
+            aroundTheWorldnewsList: aroundList));
       }
     } on CustomError catch (e) {
       emit(state.copyWith(
@@ -47,16 +50,20 @@ class ActiveCategoryBloc
       if (Categories.all == event.activeCategory) {
         if (state.allCategoriesnewsList.isEmpty) {
           emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
-          final List<News>? newsList = await newsRepository.fetchNewsList();
+          final List<News>? latestList = await newsRepository.fetchNewsList();
+          final List<News>? aroundList =
+              await newsRepository.fetchAroundTheNewsList();
           emit(state.copyWith(
             activeCategory: Categories.all,
-            allCategoriesnewsList: newsList,
+            allCategoriesnewsList: latestList,
+            aroundTheWorldnewsList: aroundList,
             loadingStatus: NewsLoadingStatus.loaded,
           ));
         } else {
           emit(state.copyWith(
             activeCategory: Categories.all,
             allCategoriesnewsList: state.allCategoriesnewsList,
+            aroundTheWorldnewsList: state.aroundTheWorldnewsList,
             loadingStatus: NewsLoadingStatus.loaded,
           ));
         }

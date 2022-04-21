@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/pages/categories_page.dart';
 import 'package:news_app_with_firebase/pages/home_page.dart';
 import 'package:news_app_with_firebase/pages/weather_page.dart';
@@ -29,16 +30,36 @@ class BottomNavBar extends StatelessWidget {
         key: _bottomNavigationKey,
         index: _page,
         height: 75.0,
-        items: const <Widget>[
-          Icon(Icons.bookmark, size: 30),
-          Icon(Icons.category, size: 30),
-          Icon(Icons.house, size: 30),
-          Icon(Icons.wb_sunny, size: 30),
-          Icon(Icons.person, size: 30),
+        items: <Widget>[
+          Icon(
+            Icons.bookmark,
+            size: 40,
+            color: themeLightColor1,
+          ),
+          Icon(
+            Icons.category,
+            size: 40,
+            color: themeLightColor1,
+          ),
+          Icon(
+            Icons.house,
+            size: 40,
+            color: themeLightColor1,
+          ),
+          Icon(
+            Icons.wb_sunny,
+            size: 40,
+            color: themeLightColor1,
+          ),
+          Icon(
+            Icons.person,
+            size: 40,
+            color: themeLightColor1,
+          ),
         ],
-        color: Colors.white,
-        buttonBackgroundColor: Colors.indigoAccent,
-        backgroundColor: Colors.white,
+        color: themeLightColor2,
+        buttonBackgroundColor: themeLightColor3,
+        backgroundColor: themeLightColor3,
         //animationCurve: Curves.easeInOut,
         animationCurve: Curves.elasticOut,
         animationDuration: const Duration(milliseconds: 600),

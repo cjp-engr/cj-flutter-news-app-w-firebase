@@ -1,10 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users');
 const String kNewsHost = 'newsdata.io';
 //const String apiKey = 'pub_63780dcbb382588eb4975b85906a0dcbbd43';
 const String apiKey = 'pub_6464e9d291abdbfffb3968f5bd8d3572989e';
 const String kWeatherHost = 'www.metaweather.com';
+
+//white theme#f3cf7a
+Color themeLightColor1 = const Color(0xfffc85ae);
+Color themeLightColor2 = const Color(0xff9e579d);
+Color themeLightColor3 = const Color(0xff574b90);
+Color themeLightColor4 = const Color(0xff303a52);
+
 const String loremIpsumParagraph =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod '
     'tempor incididunt ut labore et dolore magna aliqua. \n\nVulputate dignissim '

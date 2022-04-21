@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/utils/list_of_categories.dart';
 import 'package:news_app_with_firebase/widgets/homepage/around_the_world_section.dart';
 import 'package:news_app_with_firebase/widgets/homepage/categories/categories.dart';
@@ -16,8 +17,11 @@ class HomePage extends StatelessWidget {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: const Text('Welcome back, Carmen'),
+          backgroundColor: themeLightColor2,
+          title: Text(
+            'Welcome back, Carmen',
+            style: TextStyle(color: themeLightColor1),
+          ),
         ),
         body: Column(
           children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:animations/animations.dart';
 import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
@@ -11,7 +12,7 @@ class AroundTheWorldSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final newsList =
-        context.watch<ActiveCategoryBloc>().state.allCategoriesnewsList;
+        context.watch<ActiveCategoryBloc>().state.aroundTheWorldnewsList;
     return _aroundTheWorld(context, newsList);
   }
 
@@ -39,6 +40,9 @@ class AroundTheWorldSection extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(5),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       child: Stack(
                         children: [
                           _image(context, nList.imageUrl),
@@ -113,8 +117,8 @@ class AroundTheWorldSection extends StatelessWidget {
                 ? title.trim()
                 : title.trim().substring(0, 60) + '...',
             style: Theme.of(context).textTheme.bodyText2!.merge(
-                  const TextStyle(
-                    color: Colors.white,
+                  TextStyle(
+                    color: themeLightColor1,
                   ),
                 ),
           ),
@@ -131,8 +135,8 @@ class AroundTheWorldSection extends StatelessWidget {
           padding: const EdgeInsets.all(5),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(color: Colors.black),
+              color: themeLightColor4,
+              border: Border.all(color: themeLightColor4),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -140,8 +144,8 @@ class AroundTheWorldSection extends StatelessWidget {
               child: Text(
                 country!.trim(),
                 style: Theme.of(context).textTheme.caption!.merge(
-                      const TextStyle(
-                        color: Colors.white,
+                      TextStyle(
+                        color: themeLightColor1,
                       ),
                     ),
               ),

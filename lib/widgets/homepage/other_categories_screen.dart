@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:animations/animations.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/utils/list_of_categories.dart';
 import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
 
@@ -52,29 +53,42 @@ class OtherCategoriesScreen extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.all(10),
                 child: Card(
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          _image(context, nList.imageUrl),
-                          _title(context, nList.title),
-                          _country(context, nList.countries!),
-                        ],
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        left: BorderSide(color: themeLightColor4, width: 5),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Flexible(
-                            child: _creators(context, nList.creators!),
-                          ),
-                          Flexible(
-                            child:
-                                _publishedDate(context, nList.publishedDate!),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            _image(context, nList.imageUrl),
+                            _title(context, nList.title),
+                            _country(context, nList.countries!),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Flexible(
+                              child: _creators(context, nList.creators!),
+                            ),
+                            Flexible(
+                              child:
+                                  _publishedDate(context, nList.publishedDate!),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -84,7 +98,7 @@ class OtherCategoriesScreen extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(
             color: Colors.white,
-            height: 20,
+            height: 15,
           );
         },
       ),
@@ -94,7 +108,6 @@ class OtherCategoriesScreen extends StatelessWidget {
   Widget _image(BuildContext context, String? imageUrl) {
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(20),
         topRight: Radius.circular(20),
       ),
       child: Image.network(
@@ -148,8 +161,8 @@ class OtherCategoriesScreen extends StatelessWidget {
                 ? title.trim()
                 : title.trim().substring(0, 60) + '...',
             style: Theme.of(context).textTheme.bodyText2!.merge(
-                  const TextStyle(
-                    color: Colors.white,
+                  TextStyle(
+                    color: themeLightColor1,
                   ),
                 ),
             softWrap: true,
@@ -167,8 +180,8 @@ class OtherCategoriesScreen extends StatelessWidget {
           padding: const EdgeInsets.all(5),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(color: Colors.black),
+              color: themeLightColor4,
+              border: Border.all(color: themeLightColor4),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -176,8 +189,8 @@ class OtherCategoriesScreen extends StatelessWidget {
               child: Text(
                 country.trim(),
                 style: Theme.of(context).textTheme.caption!.merge(
-                      const TextStyle(
-                        color: Colors.white,
+                      TextStyle(
+                        color: themeLightColor1,
                       ),
                     ),
               ),
@@ -195,8 +208,8 @@ class OtherCategoriesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.black,
-            border: Border.all(color: Colors.black),
+            color: themeLightColor4,
+            border: Border.all(color: themeLightColor4),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
@@ -209,8 +222,8 @@ class OtherCategoriesScreen extends StatelessWidget {
                       ? author
                       : author.substring(0, author.indexOf(' ') + 2) + '.',
               style: Theme.of(context).textTheme.caption!.merge(
-                    const TextStyle(
-                      color: Colors.white,
+                    TextStyle(
+                      color: themeLightColor1,
                     ),
                   ),
             ),
@@ -229,8 +242,8 @@ class OtherCategoriesScreen extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
-          border: Border.all(color: Colors.black),
+          color: themeLightColor4,
+          border: Border.all(color: themeLightColor4),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
@@ -239,8 +252,8 @@ class OtherCategoriesScreen extends StatelessWidget {
           child: Text(
             publishedDate.trim(),
             style: Theme.of(context).textTheme.caption!.merge(
-                  const TextStyle(
-                    color: Colors.white,
+                  TextStyle(
+                    color: themeLightColor1,
                   ),
                 ),
           ),
