@@ -108,6 +108,7 @@ class NewsApiServices {
       queryParameters: {
         'apikey': apiKey,
         'q': keyword,
+        'language': 'en',
       },
     );
 

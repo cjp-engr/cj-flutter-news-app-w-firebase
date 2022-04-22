@@ -12,6 +12,7 @@ import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
 import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
 import 'package:news_app_with_firebase/blocs/temp_settings/temp_settings_bloc.dart';
 import 'package:news_app_with_firebase/blocs/weather/weather_bloc.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/firebase_options.dart';
 import 'package:news_app_with_firebase/pages/home_page.dart';
 import 'package:news_app_with_firebase/pages/signin_page.dart';
@@ -122,8 +123,15 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
+            iconTheme: IconThemeData(
+              color: themeLightColor1,
+            ),
             cardTheme: const CardTheme(
-              elevation: 10,
+              elevation: 20,
+            ),
+            appBarTheme: AppBarTheme(
+              backgroundColor: themeLightColor2,
+              elevation: 20,
             ),
             //primarySwatch: Colors.blue,
             textTheme: const TextTheme(
@@ -168,6 +176,7 @@ class MyApp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
+                backgroundColor: MaterialStateProperty.all(themeLightColor2),
                 elevation: MaterialStateProperty.all(10),
               ),
             ),

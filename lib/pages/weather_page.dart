@@ -23,14 +23,16 @@ class _WeatherPageState extends State<WeatherPage> {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: themeLightColor2,
           title: Text(
             'Weather',
             style: TextStyle(color: themeLightColor1),
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.search),
+              icon: const Icon(
+                Icons.search,
+                size: 40,
+              ),
               onPressed: () async {
                 _city = await Navigator.push(
                   context,
@@ -47,7 +49,10 @@ class _WeatherPageState extends State<WeatherPage> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(
+                Icons.settings,
+                size: 40,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,

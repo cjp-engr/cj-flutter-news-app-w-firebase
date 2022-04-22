@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/utils/list_of_categories.dart';
+import 'package:news_app_with_firebase/utils/string_extension.dart';
 
 class CategoriesList extends StatelessWidget {
   const CategoriesList({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class CategoriesList extends StatelessWidget {
                               MaterialStateProperty.all(themeLightColor1),
                         ),
                   child: Text(
-                    Categories.all.name,
+                    Categories.all.name.toTitleCase(),
                     style: state.activeCategory == Categories.all
                         ? TextStyle(color: themeLightColor1)
                         : TextStyle(color: themeLightColor4),
@@ -63,7 +64,7 @@ class CategoriesList extends StatelessWidget {
                               MaterialStateProperty.all(themeLightColor1),
                         ),
                   child: Text(
-                    Categories.business.name,
+                    Categories.business.name.toTitleCase(),
                     style: state.activeCategory == Categories.business
                         ? TextStyle(color: themeLightColor1)
                         : TextStyle(color: themeLightColor4),
@@ -89,7 +90,7 @@ class CategoriesList extends StatelessWidget {
                               MaterialStateProperty.all(themeLightColor1),
                         ),
                   child: Text(
-                    Categories.entertainment.name,
+                    Categories.entertainment.name.toTitleCase(),
                     style: state.activeCategory == Categories.entertainment
                         ? TextStyle(color: themeLightColor1)
                         : TextStyle(color: themeLightColor4),
@@ -115,7 +116,7 @@ class CategoriesList extends StatelessWidget {
                               MaterialStateProperty.all(themeLightColor1),
                         ),
                   child: Text(
-                    Categories.environment.name,
+                    Categories.environment.name.toTitleCase(),
                     style: state.activeCategory == Categories.environment
                         ? TextStyle(color: themeLightColor1)
                         : TextStyle(color: themeLightColor4),

@@ -5,6 +5,7 @@ import 'package:news_app_with_firebase/blocs/active_category/active_category_blo
 import 'package:animations/animations.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/utils/list_of_categories.dart';
+import 'package:news_app_with_firebase/utils/string_extension.dart';
 import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
 
 class OtherCategoriesScreen extends StatelessWidget {
@@ -38,69 +39,77 @@ class OtherCategoriesScreen extends StatelessWidget {
     }
 
     return Expanded(
-      child: ListView.separated(
-        itemCount: newsList.length,
-        itemBuilder: (BuildContext context, int index) {
-          var nList = newsList.elementAt(index);
-          return OpenContainer<bool>(
-            openBuilder: (BuildContext _, VoidCallback openContainer) {
-              return ArticleSection(
-                news: nList,
-                index: index,
-              );
-            },
-            closedBuilder: (BuildContext _, VoidCallback openContainer) {
-              return Padding(
-                padding: const EdgeInsets.all(10),
-                child: Card(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        left: BorderSide(color: themeLightColor4, width: 10),
+      child: RefreshIndicator(
+        onRefresh: () async {
+          context
+              .read<ActiveCategoryBloc>()
+              .add(RefreshNewsEvent(activeCategory: selectedCategory));
+        },
+        color: themeLightColor2,
+        child: ListView.separated(
+          itemCount: newsList.length,
+          itemBuilder: (BuildContext context, int index) {
+            var nList = newsList.elementAt(index);
+            return OpenContainer<bool>(
+              openBuilder: (BuildContext _, VoidCallback openContainer) {
+                return ArticleSection(
+                  news: nList,
+                  index: index,
+                );
+              },
+              closedBuilder: (BuildContext _, VoidCallback openContainer) {
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Card(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
                       ),
                     ),
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            _image(context, nList.imageUrl),
-                            _title(context, nList.title),
-                            _country(context, nList.countries!),
-                          ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          left: BorderSide(color: themeLightColor4, width: 10),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Flexible(
-                              child: _creators(context, nList.creators!),
-                            ),
-                            Flexible(
-                              child:
-                                  _publishedDate(context, nList.publishedDate!),
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
+                      child: Column(
+                        children: [
+                          Stack(
+                            children: [
+                              _image(context, nList.imageUrl),
+                              _title(context, nList.title),
+                              _country(context, nList.countries!),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Flexible(
+                                child: _creators(context, nList.creators!),
+                              ),
+                              Flexible(
+                                child: _publishedDate(
+                                    context, nList.publishedDate!),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const Divider(
-            color: Colors.white,
-            height: 10,
-          );
-        },
+                );
+              },
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const Divider(
+              color: Colors.white,
+              height: 10,
+            );
+          },
+        ),
       ),
     );
   }
@@ -195,7 +204,7 @@ class OtherCategoriesScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
-                country.trim(),
+                country.trim().toTitleCase(),
                 style: Theme.of(context).textTheme.caption!.merge(
                       TextStyle(
                         color: themeLightColor1,

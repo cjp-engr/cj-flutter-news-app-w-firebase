@@ -6,6 +6,7 @@ import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
 
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';
+import 'package:news_app_with_firebase/utils/string_extension.dart';
 
 class ArticleSection extends StatelessWidget {
   final News news;
@@ -20,9 +21,8 @@ class ArticleSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: themeLightColor2,
         title: Text(
-          news.categories!,
+          news.categories!.toTitleCase(),
           style: TextStyle(color: themeLightColor1),
         ),
         actions: [

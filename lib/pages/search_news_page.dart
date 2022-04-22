@@ -22,14 +22,16 @@ class _SearchNewsPageState extends State<SearchNewsPage> {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: themeLightColor2,
           title: Text(
             'Search News',
             style: TextStyle(color: themeLightColor1),
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.search),
+              icon: const Icon(
+                Icons.search,
+                size: 40,
+              ),
               onPressed: () async {
                 _searchNews = await Navigator.push(
                   context,

@@ -4,6 +4,7 @@ import 'package:news_app_with_firebase/blocs/active_category/active_category_blo
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:animations/animations.dart';
+import 'package:news_app_with_firebase/utils/string_extension.dart';
 import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
 
 class AroundTheWorldSection extends StatelessWidget {
@@ -148,7 +149,7 @@ class AroundTheWorldSection extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
-                country!.trim(),
+                country!.trim().toTitleCase(),
                 style: Theme.of(context).textTheme.caption!.merge(
                       TextStyle(
                         color: themeLightColor1,

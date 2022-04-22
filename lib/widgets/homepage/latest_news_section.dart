@@ -5,6 +5,7 @@ import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:animations/animations.dart';
 import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
+import 'package:news_app_with_firebase/utils/string_extension.dart';
 
 class LatestNewsSection extends StatelessWidget {
   const LatestNewsSection({Key? key}) : super(key: key);
@@ -147,7 +148,7 @@ class LatestNewsSection extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
-                category!.trim(),
+                category!.trim().toTitleCase(),
                 style: Theme.of(context).textTheme.bodyText2!.merge(
                       TextStyle(
                         color: themeLightColor1,

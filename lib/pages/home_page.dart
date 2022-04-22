@@ -17,7 +17,6 @@ class HomePage extends StatelessWidget {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: themeLightColor2,
           title: Text(
             'News',
             style: TextStyle(color: themeLightColor1),
@@ -26,7 +25,7 @@ class HomePage extends StatelessWidget {
         body: Column(
           children: [
             const SizedBox(
-              height: 60,
+              height: 80,
               child: CategoriesList(),
             ),
             BlocBuilder<ActiveCategoryBloc, ActiveCategoryState>(
@@ -48,25 +47,33 @@ class HomePage extends StatelessWidget {
 
   Widget _allCategoryScreen(BuildContext context) {
     return Expanded(
-      child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            child: Text(
-              'Latest News',
-              style: Theme.of(context).textTheme.headline5,
+      child: RefreshIndicator(
+        onRefresh: () async {
+          context
+              .read<ActiveCategoryBloc>()
+              .add(const RefreshNewsEvent(activeCategory: Categories.all));
+        },
+        color: themeLightColor2,
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              child: Text(
+                'Latest News',
+                style: Theme.of(context).textTheme.headline5,
+              ),
             ),
-          ),
-          const LatestNewsSection(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            child: Text(
-              'Around the world',
-              style: Theme.of(context).textTheme.headline5,
+            const LatestNewsSection(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              child: Text(
+                'Around the world',
+                style: Theme.of(context).textTheme.headline5,
+              ),
             ),
-          ),
-          const AroundTheWorldSection(),
-        ],
+            const AroundTheWorldSection(),
+          ],
+        ),
       ),
     );
   }

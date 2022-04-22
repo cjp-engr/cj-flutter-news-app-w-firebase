@@ -10,7 +10,6 @@ class SavedPage extends StatelessWidget {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: themeLightColor2,
           title: Text(
             'Saved News',
             style: TextStyle(color: themeLightColor1),

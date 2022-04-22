@@ -15,3 +15,10 @@ class FetchNewsCategoryEvent extends ActiveCategoryEvent {
 }
 
 class FetchInitialNewsEvent extends ActiveCategoryEvent {}
+
+class RefreshNewsEvent extends ActiveCategoryEvent {
+  final Categories activeCategory;
+  const RefreshNewsEvent({
+    required this.activeCategory,
+  });
+}

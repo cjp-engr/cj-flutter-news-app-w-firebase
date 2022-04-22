@@ -19,6 +19,7 @@ class ActiveCategoryBloc
   }) : super(ActiveCategoryState.initial()) {
     on<FetchInitialNewsEvent>(_fetchInitialNews);
     on<FetchNewsCategoryEvent>(_fetchNewsCategory);
+    on<RefreshNewsEvent>(_refreshNews);
   }
 
   FutureOr<void> _fetchInitialNews(
@@ -119,6 +120,56 @@ class ActiveCategoryBloc
             loadingStatus: NewsLoadingStatus.loaded,
           ));
         }
+      }
+    } on CustomError catch (e) {
+      emit(state.copyWith(
+          loadingStatus: NewsLoadingStatus.error, customError: e));
+    }
+  }
+
+  FutureOr<void> _refreshNews(
+    RefreshNewsEvent event,
+    Emitter<ActiveCategoryState> emit,
+  ) async {
+    try {
+      if (Categories.all == event.activeCategory) {
+        emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
+        final List<News>? latestList = await newsRepository.fetchNewsList();
+        final List<News>? aroundList =
+            await newsRepository.fetchAroundTheNewsList();
+        emit(state.copyWith(
+          activeCategory: Categories.all,
+          allCategoriesnewsList: latestList,
+          aroundTheWorldnewsList: aroundList,
+          loadingStatus: NewsLoadingStatus.loaded,
+        ));
+      } else if (Categories.business == event.activeCategory) {
+        emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
+        final List<News>? newsList =
+            await newsRepository.fetchNewsByCategory(Categories.business.name);
+        emit(state.copyWith(
+          activeCategory: Categories.business,
+          businessCategoriesnewsList: newsList,
+          loadingStatus: NewsLoadingStatus.loaded,
+        ));
+      } else if (Categories.entertainment == event.activeCategory) {
+        emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
+        final List<News>? newsList = await newsRepository
+            .fetchNewsByCategory(Categories.entertainment.name);
+        emit(state.copyWith(
+          activeCategory: Categories.entertainment,
+          entertainmentCategoriesnewsList: newsList,
+          loadingStatus: NewsLoadingStatus.loaded,
+        ));
+      } else if (Categories.environment == event.activeCategory) {
+        emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
+        final List<News>? newsList = await newsRepository
+            .fetchNewsByCategory(Categories.environment.name);
+        emit(state.copyWith(
+          activeCategory: Categories.environment,
+          environmentCategoriesnewsList: newsList,
+          loadingStatus: NewsLoadingStatus.loaded,
+        ));
       }
     } on CustomError catch (e) {
       emit(state.copyWith(
