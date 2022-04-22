@@ -113,9 +113,9 @@ class AroundTheWorldSection extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(
-            title!.trim().length < 60
-                ? title.trim()
-                : title.trim().substring(0, 60) + '...',
+            title!.trim(),
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodyText2!.merge(
                   TextStyle(
                     color: themeLightColor1,

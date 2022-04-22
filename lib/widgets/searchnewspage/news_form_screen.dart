@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_with_firebase/constants/constants.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+class NewsFormScreen extends StatefulWidget {
+  const NewsFormScreen({Key? key}) : super(key: key);
 
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  State<NewsFormScreen> createState() => _NewsFormScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _NewsFormScreenState extends State<NewsFormScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? _city;
+  String? _searchNews;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   void _submit() {
@@ -22,7 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
     if (form != null && form.validate()) {
       form.save();
-      Navigator.pop(context, _city!.trim());
+      Navigator.pop(context, _searchNews!.trim());
     }
   }
 
@@ -30,11 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: themeLightColor2,
-        title: Text(
-          'Search',
-          style: TextStyle(color: themeLightColor1),
-        ),
+        title: const Text('Search News'),
       ),
       body: Form(
         key: _formKey,
@@ -48,19 +43,19 @@ class _SearchScreenState extends State<SearchScreen> {
                 autofocus: true,
                 style: const TextStyle(fontSize: 18.0),
                 decoration: const InputDecoration(
-                  labelText: 'City name',
+                  labelText: 'Enter keyword',
                   hintText: 'more than 2 characters',
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(),
                 ),
                 validator: (String? input) {
                   if (input == null || input.trim().length < 2) {
-                    return 'City name must be at least 2 characters long';
+                    return 'Keyword must be at least 2 characters long';
                   }
                   return null;
                 },
                 onSaved: (String? input) {
-                  _city = input;
+                  _searchNews = input;
                 },
               ),
             ),
@@ -68,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ElevatedButton(
               onPressed: _submit,
               child: const Text(
-                "How's weather?",
+                "Search News!",
                 style: TextStyle(
                   fontSize: 20.0,
                 ),

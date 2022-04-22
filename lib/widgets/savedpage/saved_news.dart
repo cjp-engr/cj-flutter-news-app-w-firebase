@@ -123,9 +123,9 @@ class SavedNews extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: Text(
-              title!.trim().length < 60
-                  ? title.trim()
-                  : title.trim().substring(0, 55) + '...',
+              title!.trim(),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.subtitle1!.merge(
                     const TextStyle(
                       color: Colors.white,

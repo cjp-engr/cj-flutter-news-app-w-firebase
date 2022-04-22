@@ -7,6 +7,7 @@ import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
 import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import 'package:news_app_with_firebase/blocs/profile/profile_cubit.dart';
 import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
+import 'package:news_app_with_firebase/blocs/search_news/search_news_bloc.dart';
 import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
 import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
 import 'package:news_app_with_firebase/blocs/temp_settings/temp_settings_bloc.dart';
@@ -76,6 +77,11 @@ class MyApp extends StatelessWidget {
             create: (context) => ActiveCategoryBloc(
               newsRepository: RepositoryProvider.of<NewsRepository>(context),
             )..add(FetchInitialNewsEvent()),
+          ),
+          BlocProvider<SearchNewsBloc>(
+            create: (context) => SearchNewsBloc(
+              newsRepository: RepositoryProvider.of<NewsRepository>(context),
+            ),
           ),
           BlocProvider<BottomNavBarBloc>(
             create: (context) => BottomNavBarBloc(),

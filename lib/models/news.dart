@@ -38,8 +38,8 @@ class News {
         id = json['title']
             .toString()
             .trim()
-            .substring(0, 25)
-            .replaceAll(' ', '');
+            .substring(0, 10)
+            .replaceAll(RegExp('[^A-Za-z0-9]'), '');
 
   factory News.initial() => News(
         title: '',

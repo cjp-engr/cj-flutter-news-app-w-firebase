@@ -113,9 +113,9 @@ class LatestNewsSection extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(
-            title!.trim().length < 80
-                ? title.trim()
-                : title.trim().substring(0, 80) + '...',
+            title!.trim(),
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.subtitle2!.merge(
                   TextStyle(
                     color: themeLightColor1,

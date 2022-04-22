@@ -20,7 +20,11 @@ class ArticleSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(news.categories!),
+        backgroundColor: themeLightColor2,
+        title: Text(
+          news.categories!,
+          style: TextStyle(color: themeLightColor1),
+        ),
         actions: [
           IconButton(
             icon: BlocBuilder<SavedNewsBloc, SavedNewsState>(

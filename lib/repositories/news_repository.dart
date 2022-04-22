@@ -42,4 +42,15 @@ class NewsRepository {
       throw CustomError(message: e.toString());
     }
   }
+
+  Future<List<News>?> fetchSearchNews(String keyword) async {
+    try {
+      List<News>? latestNews = await newsApiServices.getSearchNews(keyword);
+      return latestNews;
+    } on NewsException catch (e) {
+      throw CustomError(message: e.message);
+    } catch (e) {
+      throw CustomError(message: e.toString());
+    }
+  }
 }

@@ -99,4 +99,33 @@ class NewsApiServices {
       rethrow;
     }
   }
+
+  Future<List<News>?> getSearchNews(String keyword) async {
+    final Uri uri = Uri(
+      scheme: 'https',
+      host: kNewsHost,
+      path: '/api/1/news',
+      queryParameters: {
+        'apikey': apiKey,
+        'q': keyword,
+      },
+    );
+
+    try {
+      final http.Response response =
+          await http.get(uri, headers: {'Content-Type': 'application/json'});
+
+      if (response.statusCode != 200) {
+        throw Exception('response.statusCode != 200');
+      }
+
+      final newsJson = json.decode(utf8.decode(response.bodyBytes))['results'];
+      List<News> results =
+          (newsJson as List).map((e) => News.fromJson(e)).toList();
+
+      return results;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

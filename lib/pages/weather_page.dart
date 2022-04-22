@@ -23,7 +23,11 @@ class _WeatherPageState extends State<WeatherPage> {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Weather'),
+          backgroundColor: themeLightColor2,
+          title: Text(
+            'Weather',
+            style: TextStyle(color: themeLightColor1),
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.search),

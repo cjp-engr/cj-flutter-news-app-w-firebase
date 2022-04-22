@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/temp_settings/temp_settings_bloc.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -9,7 +10,11 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        backgroundColor: themeLightColor2,
+        title: Text(
+          'Settings',
+          style: TextStyle(color: themeLightColor1),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(

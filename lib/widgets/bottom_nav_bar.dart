@@ -3,7 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
-import 'package:news_app_with_firebase/pages/categories_page.dart';
+import 'package:news_app_with_firebase/pages/search_news_page.dart';
 import 'package:news_app_with_firebase/pages/home_page.dart';
 import 'package:news_app_with_firebase/pages/weather_page.dart';
 import 'package:news_app_with_firebase/pages/profile_page.dart';
@@ -14,7 +14,7 @@ class BottomNavBar extends StatelessWidget {
   final int _page = 2;
   static const List<Widget> _widgetOptions = <Widget>[
     SavedPage(),
-    CategoriesPage(),
+    SearchNewsPage(),
     HomePage(),
     WeatherPage(),
     ProfilePage(),
