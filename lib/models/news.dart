@@ -36,10 +36,14 @@ class News {
         fullDescription = json['full_description'] ?? 'No Full Description',
         isSaved = false,
         id = json['title']
-            .toString()
-            .trim()
-            .substring(0, 10)
-            .replaceAll(RegExp('[^A-Za-z0-9]'), '');
+                .toString()
+                .trim()
+                .substring(0, 10)
+                .replaceAll(RegExp('[^A-Za-z0-9]'), '') +
+            json['pubDate']
+                .toString()
+                .trim()
+                .replaceAll(RegExp('[^A-Za-z0-9]'), '');
 
   factory News.initial() => News(
         title: '',

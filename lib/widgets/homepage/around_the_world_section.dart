@@ -26,6 +26,7 @@ class AroundTheWorldSection extends StatelessWidget {
           itemCount: newsList!.length,
           itemBuilder: (BuildContext ctx, index) {
             var nList = newsList.elementAt(index);
+
             return SizedBox(
               width: MediaQuery.of(context).size.width / 2,
               height: MediaQuery.of(context).size.height / 3,
