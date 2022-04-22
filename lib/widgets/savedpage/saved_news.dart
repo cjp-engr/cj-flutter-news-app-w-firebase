@@ -38,22 +38,8 @@ class SavedNews extends StatelessWidget {
                         children: [
                           _image(context, nList.imageUrl),
                           _title(context, nList.title),
-                          //_country(context, nList.countries!),
                         ],
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   mainAxisSize: MainAxisSize.max,
-                      //   children: [
-                      //     Flexible(
-                      //       child: _creators(context, nList.creators!),
-                      //     ),
-                      //     Flexible(
-                      //       child:
-                      //           _publishedDate(context, nList.publishedDate!),
-                      //     ),
-                      //   ],
-                      // ),
                     ],
                   ),
                 ),
@@ -64,7 +50,7 @@ class SavedNews extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(
             color: Colors.white,
-            height: 20,
+            height: 5,
           );
         },
       ),
@@ -133,96 +119,6 @@ class SavedNews extends StatelessWidget {
                   ),
               softWrap: true,
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _country(BuildContext context, String country) {
-    return Positioned(
-      child: Align(
-        alignment: FractionalOffset.topRight,
-        child: Padding(
-          padding: const EdgeInsets.all(5),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                country.trim(),
-                style: Theme.of(context).textTheme.caption!.merge(
-                      const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _creators(BuildContext context, List<dynamic> authors) {
-    for (var creator in authors) {
-      String auth = creator.toString().trim().replaceAll(',', '\n');
-      return Padding(
-        padding: const EdgeInsets.all(5),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.black,
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding:
-                const EdgeInsets.only(top: 7, bottom: 7, left: 10, right: 10),
-            child: Text(
-              authors[0].toString().trim().contains(',')
-                  ? auth
-                  : auth.trim().length < 15
-                      ? auth
-                      : auth.substring(0, auth.indexOf(' ') + 2) + '.',
-              style: Theme.of(context).textTheme.caption!.merge(
-                    const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-            ),
-          ),
-        ),
-      );
-    }
-    return const Text('Jane Doe');
-  }
-
-  Widget _publishedDate(BuildContext context, String pubDate) {
-    final pDate = pubDate.substring(0, pubDate.indexOf(' ') + 1);
-    final publishedDate =
-        DateFormat.yMMMd().format(DateFormat('yyyy-MM-dd').parse(pDate));
-    return Padding(
-      padding: const EdgeInsets.all(5),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black,
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 7, bottom: 7, left: 10, right: 10),
-          child: Text(
-            publishedDate.trim(),
-            style: Theme.of(context).textTheme.caption!.merge(
-                  const TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
           ),
         ),
       ),

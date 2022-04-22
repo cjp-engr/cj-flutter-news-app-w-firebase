@@ -21,6 +21,7 @@ import 'package:news_app_with_firebase/pages/splash_page.dart';
 import 'package:news_app_with_firebase/repositories/auth_repository.dart';
 import 'package:news_app_with_firebase/repositories/news_repository.dart';
 import 'package:news_app_with_firebase/repositories/profile_repository.dart';
+import 'package:news_app_with_firebase/repositories/saved_news_repository.dart';
 import 'package:news_app_with_firebase/repositories/weather_repository.dart';
 import 'package:news_app_with_firebase/services/news_api_services.dart';
 import 'package:news_app_with_firebase/services/weather_api_services.dart';
@@ -71,6 +72,11 @@ class MyApp extends StatelessWidget {
             firebaseFirestore: FirebaseFirestore.instance,
           ),
         ),
+        RepositoryProvider<SavedNewsRepository>(
+          create: (context) => SavedNewsRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -88,7 +94,10 @@ class MyApp extends StatelessWidget {
             create: (context) => BottomNavBarBloc(),
           ),
           BlocProvider<SavedNewsBloc>(
-            create: (context) => SavedNewsBloc(),
+            create: (context) => SavedNewsBloc(
+              savedNewsRepository:
+                  RepositoryProvider.of<SavedNewsRepository>(context),
+            ),
           ),
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(
@@ -137,6 +146,7 @@ class MyApp extends StatelessWidget {
             textTheme: const TextTheme(
               button: TextStyle(
                 fontSize: 20.0,
+                fontWeight: FontWeight.w600,
               ),
               headline5: TextStyle(
                 fontSize: 28.0,
@@ -173,7 +183,7 @@ class MyApp extends StatelessWidget {
               style: ButtonStyle(
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),
                 backgroundColor: MaterialStateProperty.all(themeLightColor2),

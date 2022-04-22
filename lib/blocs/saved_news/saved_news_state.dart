@@ -1,43 +1,57 @@
 part of 'saved_news_bloc.dart';
 
+enum SavedNewsStatus {
+  initial,
+  loading,
+  loaded,
+  error,
+}
+
 class SavedNewsState extends Equatable {
+  final SavedNewsStatus newsStatus;
   final List<News> savedNews;
   final List<String> id;
-  final Map<String, bool> isSaved;
+  final CustomError error;
   const SavedNewsState({
+    required this.newsStatus,
     required this.savedNews,
     required this.id,
-    required this.isSaved,
+    required this.error,
   });
 
   factory SavedNewsState.initial() {
     return const SavedNewsState(
+      newsStatus: SavedNewsStatus.initial,
       savedNews: [],
       id: [],
-      isSaved: {'mytest': false},
+      error: CustomError(),
     );
   }
 
   @override
   List<Object?> get props => [
+        newsStatus,
         savedNews,
         id,
-        isSaved,
+        error,
       ];
 
   @override
-  String toString() =>
-      'SavedNewsState(savedNews: $savedNews, id: $id, isSaved: $isSaved)';
+  String toString() {
+    return 'SavedNewsState(newsStatus: $newsStatus, savedNews: $savedNews, id: $id, error: $error)';
+  }
 
   SavedNewsState copyWith({
+    SavedNewsStatus? newsStatus,
     List<News>? savedNews,
     List<String>? id,
-    Map<String, bool>? isSaved,
+    CustomError? error,
   }) {
     return SavedNewsState(
+      newsStatus: newsStatus ?? this.newsStatus,
       savedNews: savedNews ?? this.savedNews,
       id: id ?? this.id,
-      isSaved: isSaved ?? this.isSaved,
+      error: error ?? this.error,
     );
   }
 }
