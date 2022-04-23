@@ -37,7 +37,7 @@ class BottomNavBar extends StatelessWidget {
             color: themeLightColor1,
           ),
           Icon(
-            Icons.category,
+            Icons.notes_sharp,
             size: 40,
             color: themeLightColor1,
           ),
