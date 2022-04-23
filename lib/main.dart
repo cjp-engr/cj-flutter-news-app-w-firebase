@@ -11,6 +11,7 @@ import 'package:news_app_with_firebase/blocs/search_news/search_news_bloc.dart';
 import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
 import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
 import 'package:news_app_with_firebase/blocs/temp_settings/temp_settings_bloc.dart';
+import 'package:news_app_with_firebase/blocs/theme/theme_bloc.dart';
 import 'package:news_app_with_firebase/blocs/weather/weather_bloc.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/firebase_options.dart';
@@ -127,95 +128,123 @@ class MyApp extends StatelessWidget {
               profileRepository: context.read<ProfileRepository>(),
             ),
           ),
+          BlocProvider<ThemeBloc>(
+            create: (context) => ThemeBloc(),
+          ),
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            iconTheme: IconThemeData(
-              color: themeLightColor1,
-            ),
-            cardTheme: const CardTheme(
-              elevation: 20,
-            ),
-            appBarTheme: AppBarTheme(
-              backgroundColor: themeLightColor2,
-              elevation: 20,
-              actionsIconTheme: IconThemeData(
-                color: themeLightColor1,
-              ),
-            ),
-            inputDecorationTheme: InputDecorationTheme(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(
-                  color: themeLightColor2,
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            Color _getThemeColor(bool isThemeLight) {
+              if (isThemeLight) {
+                return themeLightColor1;
+              } else {
+                return themeLightColor4;
+              }
+            }
+
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: (state.isThemeLightSwitch == true
+                      ? ThemeData.light()
+                      : ThemeData.dark())
+                  .copyWith(
+                iconTheme: IconThemeData(
+                  color: _getThemeColor(state.isThemeLightSwitch),
                 ),
-              ),
-              filled: true,
-              floatingLabelStyle: TextStyle(
-                color: themeLightColor2,
-              ),
-              iconColor: themeLightColor2,
-            ),
-            textTheme: const TextTheme(
-              button: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w600,
-              ),
-              headline5: TextStyle(
-                fontSize: 28.0,
-                fontWeight: FontWeight.w600,
-              ),
-              headline6: TextStyle(
-                fontSize: 26.5,
-                fontWeight: FontWeight.w600,
-              ),
-              subtitle1: TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.w500,
-              ),
-              subtitle2: TextStyle(
-                fontSize: 23.0,
-                fontWeight: FontWeight.w600,
-              ),
-              bodyText1: TextStyle(
-                fontSize: 21.0,
-                fontWeight: FontWeight.w300,
-              ),
-              bodyText2: TextStyle(
-                fontSize: 19.0,
-                fontWeight: FontWeight.w300,
-              ),
-              caption: TextStyle(
-                fontSize: 19.0,
-                fontWeight: FontWeight.w300,
-              ),
-            ).apply(
-              fontFamily: 'Poppins',
-            ),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
+                cardTheme: const CardTheme(
+                  elevation: 20,
+                ),
+                appBarTheme: AppBarTheme(
+                  backgroundColor: themeLightColor2,
+                  elevation: 20,
+                  actionsIconTheme: IconThemeData(
+                    color: themeLightColor1,
                   ),
                 ),
-                backgroundColor: MaterialStateProperty.all(themeLightColor2),
-                elevation: MaterialStateProperty.all(10),
+                inputDecorationTheme: InputDecorationTheme(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: themeLightColor2,
+                    ),
+                  ),
+                  filled: true,
+                  floatingLabelStyle: TextStyle(
+                    color: themeLightColor2,
+                  ),
+                  iconColor: themeLightColor2,
+                ),
+                textTheme: TextTheme(
+                  button: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600,
+                    color: _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                  headline5: TextStyle(
+                    fontSize: 28.0,
+                    fontWeight: FontWeight.w600,
+                    color: _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                  headline6: TextStyle(
+                    fontSize: 26.5,
+                    fontWeight: FontWeight.w600,
+                    color: _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                  subtitle1: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w500,
+                    color: _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                  subtitle2: TextStyle(
+                    fontSize: 23.0,
+                    fontWeight: FontWeight.w600,
+                    color: _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                  bodyText1: TextStyle(
+                    fontSize: 21.0,
+                    fontWeight: FontWeight.w300,
+                    color: _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                  bodyText2: TextStyle(
+                    fontSize: 19.0,
+                    fontWeight: FontWeight.w300,
+                    color: _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                  caption: TextStyle(
+                    fontSize: 19.0,
+                    fontWeight: FontWeight.w300,
+                    color: _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                ).apply(
+                  fontFamily: 'Poppins',
+                ),
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all(themeLightColor2),
+                    elevation: MaterialStateProperty.all(10),
+                  ),
+                ),
               ),
-            ),
-          ),
-          //home: const MyHomePage(),
-          home: const SplashPage(),
-          routes: {
-            SignupPage.routeName: (context) => const SignupPage(),
-            SigninPage.routeName: (context) => const SigninPage(),
-            HomePage.routeName: (context) => const HomePage(),
-            BottomNavBar.routeName: (context) => BottomNavBar(),
+
+              //home: const MyHomePage(),
+              home: const SplashPage(),
+              routes: {
+                SignupPage.routeName: (context) => const SignupPage(),
+                SigninPage.routeName: (context) => const SigninPage(),
+                HomePage.routeName: (context) => const HomePage(),
+                BottomNavBar.routeName: (context) => BottomNavBar(),
+              },
+            );
           },
         ),
       ),

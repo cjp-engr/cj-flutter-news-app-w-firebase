@@ -39,18 +39,21 @@ class AroundTheWorldSection extends StatelessWidget {
                   );
                 },
                 closedBuilder: (BuildContext _, VoidCallback openContainer) {
-                  return Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: Stack(
-                        children: [
-                          _image(context, nList.imageUrl),
-                          _title(context, nList.title),
-                          _country(context, nList.countries),
-                        ],
+                  return Container(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Stack(
+                          children: [
+                            _image(context, nList.imageUrl),
+                            _title(context, nList.title),
+                            _country(context, nList.countries),
+                          ],
+                        ),
                       ),
                     ),
                   );

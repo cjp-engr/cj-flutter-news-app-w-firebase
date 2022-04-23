@@ -82,21 +82,24 @@ class SavedNews extends StatelessWidget {
                 );
               },
               closedBuilder: (_, VoidCallback openContainer) {
-                return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            _image(context, nList.imageUrl),
-                            _title(context, nList.title),
-                          ],
-                        ),
-                      ],
+                return Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        children: [
+                          Stack(
+                            children: [
+                              _image(context, nList.imageUrl),
+                              _title(context, nList.title),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

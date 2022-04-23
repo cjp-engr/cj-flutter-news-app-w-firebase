@@ -95,7 +95,7 @@ class _SearchNewsPageState extends State<SearchNewsPage> {
           );
         }
 
-        return ListView.separated(
+        return ListView.builder(
           itemCount: state.newsResult.length,
           itemBuilder: (BuildContext context, int index) {
             var nList = state.newsResult.elementAt(index);
@@ -107,55 +107,53 @@ class _SearchNewsPageState extends State<SearchNewsPage> {
                 );
               },
               closedBuilder: (BuildContext _, VoidCallback openContainer) {
-                return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Card(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          left: BorderSide(color: themeLightColor4, width: 10),
+                return Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Card(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              _image(context, nList.imageUrl),
-                              _title(context, nList.title),
-                              _country(context, nList.countries!),
-                            ],
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            left:
+                                BorderSide(color: themeLightColor4, width: 10),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Flexible(
-                                child: _creators(context, nList.creators!),
-                              ),
-                              Flexible(
-                                child: _publishedDate(
-                                    context, nList.publishedDate!),
-                              ),
-                            ],
-                          ),
-                        ],
+                        ),
+                        child: Column(
+                          children: [
+                            Stack(
+                              children: [
+                                _image(context, nList.imageUrl),
+                                _title(context, nList.title),
+                                _country(context, nList.countries!),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Flexible(
+                                  child: _creators(context, nList.creators!),
+                                ),
+                                Flexible(
+                                  child: _publishedDate(
+                                      context, nList.publishedDate!),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 );
               },
-            );
-          },
-          separatorBuilder: (_, int index) {
-            return const Divider(
-              color: Colors.white,
-              height: 10,
             );
           },
         );

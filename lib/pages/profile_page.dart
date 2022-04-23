@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
 import 'package:news_app_with_firebase/blocs/profile/profile_bloc.dart';
+import 'package:news_app_with_firebase/blocs/theme/theme_bloc.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/utils/user_error_dialog.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -83,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _backgroundImage(String image) {
     return SizedBox(
       child: Image.network(
-        image.isNotEmpty ? image : 'https://picsum.photos/300',
+        image,
         width: double.infinity,
         fit: BoxFit.fill,
         color: Colors.grey.withOpacity(0.7),
@@ -93,6 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _userInfoContainer(BuildContext context) {
+    final themeSwitch = context.watch<ThemeBloc>().state.isThemeLightSwitch;
     return Positioned(
       child: Align(
         alignment: FractionalOffset.bottomCenter,
@@ -101,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
             topRight: Radius.circular(35),
           ),
           child: Container(
-            color: Colors.white,
+            color: themeSwitch ? themeLightColor1 : themeLightColor4,
             width: double.maxFinite,
             height: MediaQuery.of(context).size.height / 1.7,
             child: Padding(
@@ -123,8 +126,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       const Text('Theme'),
                       Switch(
-                        value: (true),
-                        onChanged: (_) {},
+                        value: (themeSwitch),
+                        onChanged: (_) {
+                          context.read<ThemeBloc>().add(
+                                SwitchThemeEvent(isSwitch: !themeSwitch),
+                              );
+                        },
                         activeColor: Colors.amber,
                       ),
                     ],

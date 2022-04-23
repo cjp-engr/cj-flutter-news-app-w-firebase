@@ -48,7 +48,6 @@ class _SigninPageState extends State<SigninPage> {
           },
           builder: (context, state) {
             return Scaffold(
-              backgroundColor: Colors.white,
               body: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),

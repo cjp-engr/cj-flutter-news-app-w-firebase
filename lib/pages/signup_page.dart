@@ -52,7 +52,6 @@ class _SignupPageState extends State<SignupPage> {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: Colors.white,
             body: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),

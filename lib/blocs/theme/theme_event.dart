@@ -6,3 +6,10 @@ abstract class ThemeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class SwitchThemeEvent extends ThemeEvent {
+  final bool isSwitch;
+  const SwitchThemeEvent({
+    required this.isSwitch,
+  });
+}

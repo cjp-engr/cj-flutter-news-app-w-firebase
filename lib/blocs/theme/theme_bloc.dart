@@ -5,9 +5,9 @@ part 'theme_event.dart';
 part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  ThemeBloc() : super(ThemeInitial()) {
-    on<ThemeEvent>((event, emit) {
-      // TODO: implement event handler
+  ThemeBloc() : super(ThemeState.initial()) {
+    on<SwitchThemeEvent>((event, emit) {
+      emit(state.copyWith(isThemeLightSwitch: event.isSwitch));
     });
   }
 }
