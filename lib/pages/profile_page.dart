@@ -4,6 +4,7 @@ import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
 import 'package:news_app_with_firebase/blocs/profile/profile_bloc.dart';
 import 'package:news_app_with_firebase/blocs/theme/theme_bloc.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
+import 'package:news_app_with_firebase/utils/logout_show_dialog.dart';
 import 'package:news_app_with_firebase/utils/user_error_dialog.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -114,49 +115,64 @@ class _ProfilePageState extends State<ProfilePage> {
                 right: 25,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Profile Settings',
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  const Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Theme'),
-                      Switch(
-                        value: (themeSwitch),
-                        onChanged: (_) {
-                          context.read<ThemeBloc>().add(
-                                SwitchThemeEvent(isSwitch: !themeSwitch),
-                              );
+                      Text(
+                        'Profile Settings',
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                      const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Dark'),
+                          Switch(
+                            value: (themeSwitch),
+                            onChanged: (_) {
+                              context.read<ThemeBloc>().add(
+                                    SwitchThemeEvent(isSwitch: !themeSwitch),
+                                  );
+                            },
+                          ),
+                          const Text('Light'),
+                        ],
+                      ),
+                      const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Lorem Ipsum 1'),
+                          Switch(
+                            value: (true),
+                            onChanged: (_) {},
+                          ),
+                        ],
+                      ),
+                      const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Muspi Merol 2'),
+                          Switch(
+                            value: (true),
+                            onChanged: (_) {},
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        height: 40,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          logoutShowDialog(context);
                         },
-                        activeColor: Colors.amber,
-                      ),
-                    ],
-                  ),
-                  const Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('Lorem Ipsum 1'),
-                      Switch(
-                        value: (true),
-                        onChanged: (_) {},
-                        activeColor: Colors.amber,
-                      ),
-                    ],
-                  ),
-                  const Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('Muspi Merol 2'),
-                      Switch(
-                        value: (true),
-                        onChanged: (_) {},
-                        activeColor: Colors.amber,
+                        child: const Text('Log out'),
                       ),
                     ],
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:intl/intl.dart';
+import 'package:news_app_with_firebase/blocs/font_size/font_size_bloc.dart';
 import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
 
 import 'package:news_app_with_firebase/constants/constants.dart';
@@ -64,7 +65,67 @@ class ArticleSection extends StatelessWidget {
               Icons.settings,
               size: 40,
             ),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  double fontSize =
+                      context.watch<FontSizeBloc>().state.fontSize;
+                  return AlertDialog(
+                    content: SizedBox(
+                      height: MediaQuery.of(context).size.height / 3,
+                      child: Column(
+                        children: [
+                          const Text("Font Size"),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 6,
+                            width: double.maxFinite,
+                            child: Text(
+                              'AaBbCcDdEeFfGh123456',
+                              style:
+                                  Theme.of(context).textTheme.bodyText1!.merge(
+                                        TextStyle(
+                                          fontSize: context
+                                              .watch<FontSizeBloc>()
+                                              .state
+                                              .fontSize,
+                                        ),
+                                      ),
+                            ),
+                          ),
+                          Slider(
+                            value: fontSize,
+                            min: 21,
+                            max: 35,
+                            divisions: 10,
+                            label: fontSize.round().toString(),
+                            onChanged: (double value) {
+                              context
+                                  .read<FontSizeBloc>()
+                                  .add(ChangeFontSizeEvent(fontSize: value));
+                            },
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              'Apply',
+                              style:
+                                  Theme.of(context).textTheme.bodyText2!.merge(
+                                        TextStyle(
+                                          color: themeLightColor2,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                barrierDismissible: false,
+              );
+            },
           ),
         ],
       ),
@@ -101,7 +162,11 @@ class ArticleSection extends StatelessWidget {
         news.description != null
             ? news.description!
             : loremIpsumParagraph.substring(0, 100),
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyText1!.merge(
+              TextStyle(
+                fontSize: context.watch<FontSizeBloc>().state.fontSize,
+              ),
+            ),
       ),
     );
   }
@@ -184,7 +249,11 @@ class ArticleSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         loremIpsumParagraph,
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyText1!.merge(
+              TextStyle(
+                fontSize: context.watch<FontSizeBloc>().state.fontSize,
+              ),
+            ),
       ),
     );
   }

@@ -93,9 +93,11 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
           isSaved: news['isSaved'],
           id: news['id'],
         );
+        List<String>? savedId = [...state.id, news['id']!];
         final rNews = [...state.savedNews, savedNews];
         emit(state.copyWith(
           savedNews: rNews,
+          id: savedId,
           newsStatus: SavedNewsStatus.loaded,
         ));
       }

@@ -34,17 +34,11 @@ class SavedNews extends StatelessWidget {
                   return AlertDialog(
                     title: Text(
                       'Are you sure?',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5!
-                          .merge(TextStyle(color: themeLightColor3)),
+                      style: Theme.of(context).textTheme.headline5,
                     ),
                     content: Text(
                       'Do you really want to delete?',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .merge(TextStyle(color: themeLightColor3)),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                     actions: [
                       TextButton(

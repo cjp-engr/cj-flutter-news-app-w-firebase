@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
 import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
 import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
+import 'package:news_app_with_firebase/blocs/font_size/font_size_bloc.dart';
 import 'package:news_app_with_firebase/blocs/profile/profile_bloc.dart';
 import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
 import 'package:news_app_with_firebase/blocs/search_news/search_news_bloc.dart';
@@ -131,6 +132,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<ThemeBloc>(
             create: (context) => ThemeBloc(),
           ),
+          BlocProvider<FontSizeBloc>(
+            create: (context) => FontSizeBloc(),
+          ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
@@ -154,6 +158,15 @@ class MyApp extends StatelessWidget {
                 ),
                 cardTheme: const CardTheme(
                   elevation: 20,
+                ),
+                switchTheme: SwitchThemeData(
+                  thumbColor: MaterialStateProperty.all(
+                    _getThemeColor(!state.isThemeLightSwitch),
+                  ),
+                ),
+                sliderTheme: SliderThemeData(
+                  activeTrackColor: _getThemeColor(!state.isThemeLightSwitch),
+                  thumbColor: _getThemeColor(!state.isThemeLightSwitch),
                 ),
                 appBarTheme: AppBarTheme(
                   backgroundColor: themeLightColor2,
