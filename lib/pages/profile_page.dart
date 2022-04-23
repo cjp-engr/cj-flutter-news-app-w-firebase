@@ -1,26 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
+import 'package:news_app_with_firebase/blocs/profile/profile_bloc.dart';
+import 'package:news_app_with_firebase/utils/user_error_dialog.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    _getProfile();
+    super.initState();
+  }
+
+  void _getProfile() {
+    final String uid = context.read<AuthBloc>().state.user!.uid;
+
+    context.read<ProfileBloc>().add(FetchInitialDetailsEvent(uid: uid));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Stack(
-        children: [
-          _backgroundImage(context),
-          _userInfoContainer(context),
-          _userAvatarImage(context),
-          _userInfo(context),
-        ],
+      child: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          if (state.profileStatus == ProfileStatus.initial) {
+            return const Text('Walang laman');
+          } else if (state.profileStatus == ProfileStatus.loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state.profileStatus == ProfileStatus.error) {
+            return Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/error.png',
+                    width: 75,
+                    height: 75,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(width: 20.0),
+                  const Text(
+                    'Ooops!\nTry again',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.red,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+          return Stack(
+            children: [
+              _backgroundImage(state.user.profileImage),
+              _userInfoContainer(context),
+              _userAvatarImage(
+                context,
+                state.user.profileImage,
+              ),
+              _userInfo(
+                context,
+                state.user.name,
+                state.user.email,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  Widget _backgroundImage(context) {
+  Widget _backgroundImage(String image) {
     return SizedBox(
       child: Image.network(
-        'https://picsum.photos/300',
+        image.isNotEmpty ? image : 'https://picsum.photos/300',
         width: double.infinity,
         fit: BoxFit.fill,
         color: Colors.grey.withOpacity(0.7),
@@ -99,7 +162,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _userAvatarImage(BuildContext context) {
+  Widget _userAvatarImage(BuildContext context, String image) {
     return Positioned(
       bottom: MediaQuery.of(context).size.height / 1.7 - 75,
       left: 10,
@@ -107,10 +170,12 @@ class ProfilePage extends StatelessWidget {
         child: Container(
           height: 150,
           width: 150,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
-              image: NetworkImage('https://picsum.photos/300'),
+              image: NetworkImage(
+                image.isNotEmpty ? image : 'https://picsum.photos/300',
+              ),
               fit: BoxFit.fill,
             ),
           ),
@@ -119,7 +184,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _userInfo(BuildContext context) {
+  Widget _userInfo(BuildContext context, String name, String email) {
     return Positioned(
       bottom: MediaQuery.of(context).size.height / 1.7 - 165,
       left: MediaQuery.of(context).size.width / 2 - 50,
@@ -129,9 +194,9 @@ class ProfilePage extends StatelessWidget {
           width: 260,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Carmen Joy Palsario'),
-              Text('email@gmail.com'),
+            children: [
+              Text(name),
+              Text(email),
             ],
           ),
         ),

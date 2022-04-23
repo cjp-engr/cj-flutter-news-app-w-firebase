@@ -1,4 +1,4 @@
-part of 'profile_cubit.dart';
+part of 'profile_bloc.dart';
 
 enum ProfileStatus {
   initial,

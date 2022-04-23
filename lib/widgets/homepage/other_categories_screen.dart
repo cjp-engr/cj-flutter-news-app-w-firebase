@@ -235,7 +235,7 @@ class OtherCategoriesScreen extends StatelessWidget {
             child: Text(
               authors[0].toString().trim().contains(',')
                   ? author
-                  : author.trim().length < 15
+                  : author.trim().length < 10
                       ? author
                       : author.substring(0, author.indexOf(' ') + 2) + '.',
               style: Theme.of(context).textTheme.caption!.merge(
