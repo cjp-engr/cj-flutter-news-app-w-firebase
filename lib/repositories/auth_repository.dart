@@ -1,7 +1,11 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/user_custom_error.dart';
+import 'package:path_provider/path_provider.dart';
 
 class AuthRepository {
   final FirebaseFirestore firebaseFirestore;
@@ -34,6 +38,11 @@ class AuthRepository {
         'point': 0,
         'rank': 'bronze',
       });
+      await usersRef
+          .doc(signedInUser.uid)
+          .collection('news')
+          .doc('savedNews')
+          .set({});
     } on fb_auth.FirebaseAuthException catch (e) {
       throw CustomError(
         code: e.code,
@@ -75,5 +84,26 @@ class AuthRepository {
 
   Future<void> signout() async {
     await firebaseAuth.signOut();
+    await FirebaseFirestore.instance.terminate();
+    await FirebaseFirestore.instance.clearPersistence();
+    await _deleteCacheDir();
+    await _deleteAppDir();
+  }
+
+  Future<void> _deleteCacheDir() async {
+    Directory tempDir = await getTemporaryDirectory();
+    String tempPath = tempDir.path;
+    log(tempPath);
+    if (tempDir.existsSync()) {
+      tempDir.deleteSync(recursive: true);
+    }
+  }
+
+  Future<void> _deleteAppDir() async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+
+    if (appDocDir.existsSync()) {
+      appDocDir.deleteSync(recursive: true);
+    }
   }
 }

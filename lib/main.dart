@@ -2,18 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app_with_firebase/blocs/active_category/active_category_bloc.dart';
-import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
-import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
-import 'package:news_app_with_firebase/blocs/font_size/font_size_bloc.dart';
-import 'package:news_app_with_firebase/blocs/profile/profile_bloc.dart';
-import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
-import 'package:news_app_with_firebase/blocs/search_news/search_news_bloc.dart';
-import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
-import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
-import 'package:news_app_with_firebase/blocs/temp_settings/temp_settings_bloc.dart';
-import 'package:news_app_with_firebase/blocs/theme/theme_bloc.dart';
-import 'package:news_app_with_firebase/blocs/weather/weather_bloc.dart';
+import '../../blocs/blocs.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/firebase_options.dart';
 import 'package:news_app_with_firebase/pages/home_page.dart';
@@ -99,7 +88,8 @@ class MyApp extends StatelessWidget {
             create: (context) => SavedNewsBloc(
               savedNewsRepository:
                   RepositoryProvider.of<SavedNewsRepository>(context),
-            )..add(FetchSavedNewsEvent()),
+              bottomNavBarBloc: BlocProvider.of<BottomNavBarBloc>(context),
+            ),
           ),
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(

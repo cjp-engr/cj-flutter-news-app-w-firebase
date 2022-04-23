@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:news_app_with_firebase/blocs/blocs.dart';
 
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:news_app_with_firebase/models/user_custom_error.dart';
@@ -9,12 +12,21 @@ part 'saved_news_event.dart';
 part 'saved_news_state.dart';
 
 class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
+  late StreamSubscription bottomNavBarSubscription;
+  final BottomNavBarBloc bottomNavBarBloc;
   final SavedNewsRepository savedNewsRepository;
   SavedNewsBloc({
+    required this.bottomNavBarBloc,
     required this.savedNewsRepository,
   }) : super(SavedNewsState.initial()) {
+    bottomNavBarSubscription =
+        bottomNavBarBloc.stream.listen((BottomNavBarState bottomNavBarState) {
+      if (bottomNavBarState.currentIndex == 0) {
+        add(FetchSavedNewsEvent());
+      }
+    });
     on<ToggleSavedNewsEvent>(_toggleSavedNews);
-    on<FetchSavedNewsEvent>(_initialLoadTodo);
+    on<FetchSavedNewsEvent>(_initialLoadNews);
   }
 
   Future<void> _toggleSavedNews(
@@ -68,15 +80,17 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
     }
   }
 
-  Future<void> _initialLoadTodo(
+  Future<void> _initialLoadNews(
     FetchSavedNewsEvent event,
     Emitter<SavedNewsState> emit,
   ) async {
     try {
       List<News> clearExistingTodos = [];
+      List<String>? clearExistingIds = [];
       emit(state.copyWith(
         newsStatus: SavedNewsStatus.loading,
         savedNews: clearExistingTodos,
+        id: clearExistingIds,
       ));
       var sNews = await savedNewsRepository.readSavedNews() as Map;
       for (var news in sNews.values) {

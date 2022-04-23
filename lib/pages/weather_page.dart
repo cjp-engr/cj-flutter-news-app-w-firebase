@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_with_firebase/blocs/temp_settings/temp_settings_bloc.dart';
-import 'package:news_app_with_firebase/blocs/weather/weather_bloc.dart';
 import 'package:news_app_with_firebase/utils/weather_error_dialog.dart';
-import 'package:news_app_with_firebase/widgets/weatherpage/search_screen.dart';
-import 'package:news_app_with_firebase/widgets/weatherpage/settings_screen.dart';
+import '../blocs/blocs.dart';
+import '../widgets/weatherpage/export_weather_screen.dart';
 
 import '../constants/constants.dart';
 
@@ -23,6 +21,7 @@ class _WeatherPageState extends State<WeatherPage> {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
             'Weather',
             style: TextStyle(color: themeLightColor1),
@@ -92,7 +91,7 @@ class _WeatherPageState extends State<WeatherPage> {
     return BlocConsumer<WeatherBloc, WeatherState>(
       listener: (context, state) {
         if (state.status == WeatherStatus.error) {
-          errorDialog(context, state.error.message);
+          errorDialog(context, state.error.errMsg);
         }
       },
       builder: (context, state) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_with_firebase/blocs/signin/signin_cubit.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
+import '../blocs/blocs.dart';
 import 'package:news_app_with_firebase/pages/signup_page.dart';
 import 'package:news_app_with_firebase/utils/user_error_dialog.dart';
 import 'package:validators/validators.dart';
@@ -32,6 +33,7 @@ class _SigninPageState extends State<SigninPage> {
     //print('email: $_email, password: $_password');
 
     context.read<SigninCubit>().signin(email: _email!, password: _password!);
+    context.read<BottomNavBarBloc>().add(const SetPageEvent(index: 2));
   }
 
   @override
@@ -134,12 +136,14 @@ class _SigninPageState extends State<SigninPage> {
                                       Navigator.pushNamed(
                                           context, SignupPage.routeName);
                                     },
-                          child: const Text('Not a member? Sign Up!'),
-                          style: TextButton.styleFrom(
-                            textStyle: const TextStyle(
-                              fontSize: 20.0,
-                              decoration: TextDecoration.underline,
-                            ),
+                          child: Text(
+                            'Not a member? Sign Up!',
+                            style: Theme.of(context).textTheme.bodyText2!.merge(
+                                  TextStyle(
+                                    color: themeLightColor2,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                           ),
                         ),
                       ],

@@ -2,10 +2,14 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+//import 'package:news_app_with_firebase/models/user_custom_error.dart';
+import 'package:news_app_with_firebase/models/weather.dart';
+import 'package:news_app_with_firebase/models/weather_custom_error.dart';
+import 'package:news_app_with_firebase/repositories/weather_repository.dart';
 
-import '../../models/user_custom_error.dart';
-import '../../models/weather.dart';
-import '../../repositories/weather_repository.dart';
+// import '../../models/user_custom_error.dart';
+// import '../../models/weather.dart';
+// import '../../repositories/weather_repository.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';

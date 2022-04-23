@@ -2,7 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:news_app_with_firebase/blocs/search_news/search_news_bloc.dart';
+import '../blocs/blocs.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/utils/string_extension.dart';
 import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
@@ -23,6 +23,7 @@ class _SearchNewsPageState extends State<SearchNewsPage> {
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
             'Search News',
             style: TextStyle(color: themeLightColor1),

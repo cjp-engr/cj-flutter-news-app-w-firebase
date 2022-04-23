@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_with_firebase/blocs/signup/signup_cubit.dart';
+import 'package:news_app_with_firebase/constants/constants.dart';
+import '../blocs/blocs.dart';
 import 'package:news_app_with_firebase/utils/user_error_dialog.dart';
 import 'package:validators/validators.dart';
 
@@ -37,6 +38,7 @@ class _SignupPageState extends State<SignupPage> {
           email: _email!,
           password: _password!,
         );
+    context.read<BottomNavBarBloc>().add(const SetPageEvent(index: 2));
   }
 
   @override
@@ -177,15 +179,15 @@ class _SignupPageState extends State<SignupPage> {
                             : () {
                                 Navigator.pop(context);
                               },
-                        style: TextButton.styleFrom(
-                          textStyle: const TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600,
-                            decoration: TextDecoration.underline,
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Text(
+                          'Already a member? Sign in!',
+                          style: Theme.of(context).textTheme.bodyText2!.merge(
+                                TextStyle(
+                                  color: themeLightColor2,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                         ),
-                        child: const Text('Already a member? Sign in!'),
                       ),
                     ].reversed.toList(),
                   ),

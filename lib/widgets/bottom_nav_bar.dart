@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_with_firebase/blocs/bottom_nav_bar/bottom_nav_bar_bloc.dart';
+import '../../blocs/blocs.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/pages/search_news_page.dart';
 import 'package:news_app_with_firebase/pages/home_page.dart';

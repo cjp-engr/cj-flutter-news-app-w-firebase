@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:intl/intl.dart';
-import 'package:news_app_with_firebase/blocs/font_size/font_size_bloc.dart';
-import 'package:news_app_with_firebase/blocs/saved_news/saved_news_bloc.dart';
+import '../../blocs/blocs.dart';
 
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/models/news.dart';

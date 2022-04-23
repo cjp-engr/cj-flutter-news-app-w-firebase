@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../models/user_custom_error.dart';
-import '../../repositories/auth_repository.dart';
+import 'package:news_app_with_firebase/models/user_custom_error.dart';
+import 'package:news_app_with_firebase/repositories/auth_repository.dart';
 
 part 'signin_state.dart';
 

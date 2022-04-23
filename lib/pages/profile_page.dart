@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_with_firebase/blocs/auth/auth_bloc.dart';
-import 'package:news_app_with_firebase/blocs/profile/profile_bloc.dart';
-import 'package:news_app_with_firebase/blocs/theme/theme_bloc.dart';
+import '../blocs/blocs.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
 import 'package:news_app_with_firebase/utils/logout_show_dialog.dart';
-import 'package:news_app_with_firebase/utils/user_error_dialog.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -156,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           const Text('Muspi Merol 2'),
                           Switch(
-                            value: (true),
+                            value: (false),
                             onChanged: (_) {},
                           ),
                         ],
@@ -218,7 +215,13 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(name),
+              Text(
+                name,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .merge(const TextStyle(fontWeight: FontWeight.w600)),
+              ),
               Text(email),
             ],
           ),

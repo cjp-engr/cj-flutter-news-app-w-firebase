@@ -8,7 +8,7 @@ class BottomNavBarState extends Equatable {
 
   factory BottomNavBarState.initial() {
     return const BottomNavBarState(
-      currentIndex: 4,
+      currentIndex: 2,
     );
   }
 
