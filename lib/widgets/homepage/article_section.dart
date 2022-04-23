@@ -23,7 +23,17 @@ class ArticleSection extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           news.categories!.toTitleCase(),
-          style: TextStyle(color: themeLightColor1),
+          style: Theme.of(context).textTheme.headline6!.merge(
+                TextStyle(color: themeLightColor1),
+              ),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            size: 40,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
           IconButton(
@@ -45,10 +55,11 @@ class ArticleSection extends StatelessWidget {
             onPressed: () {
               context
                   .read<SavedNewsBloc>()
-                  .add(AddSavedNewsEvent(savedNews: news));
+                  .add(ToggleSavedNewsEvent(savedNews: news));
             },
           ),
           IconButton(
+            padding: const EdgeInsets.only(right: 15),
             icon: const Icon(
               Icons.settings,
               size: 40,

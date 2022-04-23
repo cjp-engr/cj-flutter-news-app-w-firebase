@@ -39,7 +39,7 @@ class News {
                 .toString()
                 .trim()
                 .substring(0, 10)
-                .replaceAll(RegExp('[^A-Za-z0-9]'), '') +
+                .replaceAll(RegExp('[^A-Za-z]'), '') +
             json['pubDate']
                 .toString()
                 .trim()

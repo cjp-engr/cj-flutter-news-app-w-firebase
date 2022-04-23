@@ -97,7 +97,7 @@ class MyApp extends StatelessWidget {
             create: (context) => SavedNewsBloc(
               savedNewsRepository:
                   RepositoryProvider.of<SavedNewsRepository>(context),
-            ),
+            )..add(FetchSavedNewsEvent()),
           ),
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(
@@ -141,8 +141,26 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               backgroundColor: themeLightColor2,
               elevation: 20,
+              actionsIconTheme: IconThemeData(
+                color: themeLightColor1,
+              ),
             ),
-            //primarySwatch: Colors.blue,
+            inputDecorationTheme: InputDecorationTheme(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(
+                  color: themeLightColor2,
+                ),
+              ),
+              filled: true,
+              floatingLabelStyle: TextStyle(
+                color: themeLightColor2,
+              ),
+              iconColor: themeLightColor2,
+            ),
             textTheme: const TextTheme(
               button: TextStyle(
                 fontSize: 20.0,
@@ -202,26 +220,5 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
   }
 }

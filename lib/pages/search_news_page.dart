@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app_with_firebase/blocs/search_news/search_news_bloc.dart';
 import 'package:news_app_with_firebase/constants/constants.dart';
+import 'package:news_app_with_firebase/utils/string_extension.dart';
 import 'package:news_app_with_firebase/widgets/homepage/article_section.dart';
 import 'package:news_app_with_firebase/widgets/searchnewspage/news_form_screen.dart';
 
@@ -28,6 +29,7 @@ class _SearchNewsPageState extends State<SearchNewsPage> {
           ),
           actions: [
             IconButton(
+              padding: const EdgeInsets.only(right: 15),
               icon: const Icon(
                 Icons.search,
                 size: 40,
@@ -64,10 +66,10 @@ class _SearchNewsPageState extends State<SearchNewsPage> {
       },
       builder: (context, state) {
         if (state.loadingStatus == SearchNewsLoadingStatus.initial) {
-          return const Center(
+          return Center(
             child: Text(
               'Search News',
-              style: TextStyle(fontSize: 20.0),
+              style: Theme.of(context).textTheme.headline5,
             ),
           );
         }
@@ -251,7 +253,7 @@ class _SearchNewsPageState extends State<SearchNewsPage> {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
-                country.trim(),
+                country.trim().toTitleCase(),
                 style: Theme.of(context).textTheme.caption!.merge(
                       TextStyle(
                         color: themeLightColor1,

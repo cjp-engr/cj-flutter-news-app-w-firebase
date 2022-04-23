@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:news_app_with_firebase/constants/constants.dart';
@@ -37,6 +39,30 @@ class SavedNewsRepository {
         SetOptions(merge: true),
       );
       //return news.id!;
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  Future<void> removeSavedNews(String id) async {
+    try {
+      await usersRef
+          .doc(_userUid)
+          .collection('news')
+          .doc('savedNews')
+          .update({id: FieldValue.delete()})
+          .then((value) => log('News unsaved'))
+          .catchError((error) => log('Failed to delete'));
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,

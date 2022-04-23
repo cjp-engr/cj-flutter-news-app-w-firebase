@@ -13,14 +13,15 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
   SavedNewsBloc({
     required this.savedNewsRepository,
   }) : super(SavedNewsState.initial()) {
-    on<AddSavedNewsEvent>(_addSavedNews);
+    on<ToggleSavedNewsEvent>(_toggleSavedNews);
+    on<FetchSavedNewsEvent>(_initialLoadTodo);
   }
 
-  Future<void> _addSavedNews(
-      AddSavedNewsEvent event, Emitter<SavedNewsState> emit) async {
+  Future<void> _toggleSavedNews(
+      ToggleSavedNewsEvent event, Emitter<SavedNewsState> emit) async {
     try {
       if (!state.id.contains(event.savedNews.id)) {
-        final addedSavedNews = News(
+        final addedNews = News(
           title: event.savedNews.title,
           creators: event.savedNews.creators,
           description: event.savedNews.description,
@@ -30,12 +31,12 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
           countries: event.savedNews.countries,
           categories: event.savedNews.categories,
           fullDescription: event.savedNews.fullDescription,
-          isSaved: !event.savedNews.isSaved!,
+          isSaved: true,
           id: event.savedNews.id,
         );
-        await savedNewsRepository.saveNews(addedSavedNews);
+        await savedNewsRepository.saveNews(addedNews);
         List<String>? savedId = [...state.id, event.savedNews.id!];
-        final savedNews = [...state.savedNews, addedSavedNews];
+        final savedNews = [...state.savedNews, addedNews];
         emit(
           state.copyWith(
             newsStatus: SavedNewsStatus.loaded,
@@ -44,6 +45,7 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
           ),
         );
       } else {
+        await savedNewsRepository.removeSavedNews(event.savedNews.id!);
         state.id.remove(event.savedNews.id);
         final savedNews = state.savedNews
             .where((News news) => news.id != event.savedNews.id)
@@ -63,6 +65,45 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
           error: e,
         ),
       );
+    }
+  }
+
+  Future<void> _initialLoadTodo(
+    FetchSavedNewsEvent event,
+    Emitter<SavedNewsState> emit,
+  ) async {
+    try {
+      List<News> clearExistingTodos = [];
+      emit(state.copyWith(
+        newsStatus: SavedNewsStatus.loading,
+        savedNews: clearExistingTodos,
+      ));
+      var sNews = await savedNewsRepository.readSavedNews() as Map;
+      for (var news in sNews.values) {
+        final savedNews = News(
+          title: news['title'],
+          creators: news['creators'],
+          description: news['description'],
+          content: news['content'],
+          publishedDate: news['publishedDate'],
+          imageUrl: news['imageUrl'],
+          countries: news['countries'],
+          categories: news['categories'],
+          fullDescription: news['fullDescription'],
+          isSaved: news['isSaved'],
+          id: news['id'],
+        );
+        final rNews = [...state.savedNews, savedNews];
+        emit(state.copyWith(
+          savedNews: rNews,
+          newsStatus: SavedNewsStatus.loaded,
+        ));
+      }
+    } on CustomError catch (e) {
+      emit(state.copyWith(
+        newsStatus: SavedNewsStatus.error,
+        error: e,
+      ));
     }
   }
 }

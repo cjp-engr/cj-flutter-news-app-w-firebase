@@ -49,6 +49,7 @@ class _WeatherPageState extends State<WeatherPage> {
               },
             ),
             IconButton(
+              padding: const EdgeInsets.only(right: 15),
               icon: const Icon(
                 Icons.settings,
                 size: 40,
@@ -96,10 +97,10 @@ class _WeatherPageState extends State<WeatherPage> {
       },
       builder: (context, state) {
         if (state.status == WeatherStatus.initial) {
-          return const Center(
+          return Center(
             child: Text(
               'Select a city',
-              style: TextStyle(fontSize: 20.0),
+              style: Theme.of(context).textTheme.headline5,
             ),
           );
         }
