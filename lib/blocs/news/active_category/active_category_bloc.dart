@@ -37,16 +37,14 @@ class ActiveCategoryBloc
     Emitter<ActiveCategoryState> emit,
   ) async {
     try {
-      if (state.allCategoriesnewsList.isEmpty) {
-        emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
-        final List<News>? latestList = await newsRepository.fetchNewsList();
-        final List<News>? aroundList =
-            await newsRepository.fetchAroundTheNewsList();
-        emit(state.copyWith(
-            loadingStatus: NewsLoadingStatus.loaded,
-            allCategoriesnewsList: latestList,
-            aroundTheWorldnewsList: aroundList));
-      }
+      emit(state.copyWith(loadingStatus: NewsLoadingStatus.loading));
+      final List<News>? latestList = await newsRepository.fetchNewsList();
+      final List<News>? aroundList =
+          await newsRepository.fetchAroundTheNewsList();
+      emit(state.copyWith(
+          loadingStatus: NewsLoadingStatus.loaded,
+          allCategoriesnewsList: latestList,
+          aroundTheWorldnewsList: aroundList));
     } on CustomError catch (e) {
       emit(state.copyWith(
           loadingStatus: NewsLoadingStatus.error, customError: e));

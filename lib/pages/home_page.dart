@@ -30,11 +30,7 @@ class HomePage extends StatelessWidget {
               builder: (_, state) {
                 return state.activeCategory == Categories.all
                     ? _allCategoryScreen(context)
-                    : state.loadingStatus == NewsLoadingStatus.loading
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : _otherCategoriesScreen();
+                    : _otherCategoriesScreen();
               },
             ),
           ],

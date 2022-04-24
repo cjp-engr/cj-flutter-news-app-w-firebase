@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
               savedNewsRepository:
                   RepositoryProvider.of<SavedNewsRepository>(context),
               signinCubit: BlocProvider.of<SigninCubit>(context),
-            ),
+            )..add(FetchSavedNewsEvent()),
           ),
           BlocProvider<WeatherBloc>(
             create: (context) => WeatherBloc(

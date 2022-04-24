@@ -27,6 +27,21 @@ class OtherCategoriesScreen extends StatelessWidget {
         color: themeLightColor2,
         child: BlocBuilder<ActiveCategoryBloc, ActiveCategoryState>(
           builder: (_, state) {
+            if (state.loadingStatus == NewsLoadingStatus.initial) {
+              return const Center(
+                child: Text('NewsLoadingStatus.initial...'),
+              );
+            }
+            if (state.loadingStatus == NewsLoadingStatus.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state.loadingStatus == NewsLoadingStatus.error) {
+              return const Center(
+                child: Text('An error occured!!'),
+              );
+            }
             List<News> newsList = state.allCategoriesnewsList;
             if (state.activeCategory == Categories.all) {
               newsList = state.allCategoriesnewsList;
