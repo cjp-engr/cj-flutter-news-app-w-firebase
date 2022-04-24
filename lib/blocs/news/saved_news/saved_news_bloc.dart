@@ -12,16 +12,15 @@ part 'saved_news_event.dart';
 part 'saved_news_state.dart';
 
 class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
-  late StreamSubscription bottomNavBarSubscription;
-  final BottomNavBarBloc bottomNavBarBloc;
+  late StreamSubscription signinSubscription;
+  final SigninCubit signinCubit;
   final SavedNewsRepository savedNewsRepository;
   SavedNewsBloc({
-    required this.bottomNavBarBloc,
+    required this.signinCubit,
     required this.savedNewsRepository,
   }) : super(SavedNewsState.initial()) {
-    bottomNavBarSubscription =
-        bottomNavBarBloc.stream.listen((BottomNavBarState bottomNavBarState) {
-      if (bottomNavBarState.currentIndex == 0) {
+    signinSubscription = signinCubit.stream.listen((SigninState signinState) {
+      if (signinState.signinStatus == SigninStatus.success) {
         add(FetchSavedNewsEvent());
       }
     });
@@ -125,7 +124,7 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
 
   @override
   Future<void> close() {
-    bottomNavBarSubscription.cancel();
+    signinSubscription.cancel();
     return super.close();
   }
 }

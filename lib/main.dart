@@ -71,28 +71,13 @@ class MyApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<ActiveCategoryBloc>(
-            create: (context) => ActiveCategoryBloc(
-              newsRepository: RepositoryProvider.of<NewsRepository>(context),
-            )..add(FetchInitialNewsEvent()),
-          ),
-          BlocProvider<SearchNewsBloc>(
-            create: (context) => SearchNewsBloc(
-              newsRepository: RepositoryProvider.of<NewsRepository>(context),
-            ),
-          ),
-          BlocProvider<BottomNavBarBloc>(
-            create: (context) => BottomNavBarBloc(),
-          ),
-          BlocProvider<SavedNewsBloc>(
-            create: (context) => SavedNewsBloc(
-              savedNewsRepository:
-                  RepositoryProvider.of<SavedNewsRepository>(context),
-              bottomNavBarBloc: BlocProvider.of<BottomNavBarBloc>(context),
-            )..add(FetchSavedNewsEvent()),
-          ),
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider<SignupCubit>(
+            create: (context) => SignupCubit(
               authRepository: context.read<AuthRepository>(),
             ),
           ),
@@ -101,9 +86,32 @@ class MyApp extends StatelessWidget {
               authRepository: context.read<AuthRepository>(),
             ),
           ),
-          BlocProvider<SignupCubit>(
-            create: (context) => SignupCubit(
-              authRepository: context.read<AuthRepository>(),
+          BlocProvider<BottomNavBarBloc>(
+            create: (context) => BottomNavBarBloc(
+              signinCubit: BlocProvider.of<SigninCubit>(context),
+            ),
+          ),
+          BlocProvider<ActiveCategoryBloc>(
+            create: (context) => ActiveCategoryBloc(
+              newsRepository: RepositoryProvider.of<NewsRepository>(context),
+              signinCubit: BlocProvider.of<SigninCubit>(context),
+            )..add(FetchInitialNewsEvent()),
+          ),
+          BlocProvider<ProfileBloc>(
+            create: (context) => ProfileBloc(
+              profileRepository: context.read<ProfileRepository>(),
+            ),
+          ),
+          BlocProvider<SearchNewsBloc>(
+            create: (context) => SearchNewsBloc(
+              newsRepository: RepositoryProvider.of<NewsRepository>(context),
+            ),
+          ),
+          BlocProvider<SavedNewsBloc>(
+            create: (context) => SavedNewsBloc(
+              savedNewsRepository:
+                  RepositoryProvider.of<SavedNewsRepository>(context),
+              signinCubit: BlocProvider.of<SigninCubit>(context),
             ),
           ),
           BlocProvider<WeatherBloc>(
@@ -113,11 +121,6 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<TempSettingsBloc>(
             create: (context) => TempSettingsBloc(),
-          ),
-          BlocProvider<ProfileBloc>(
-            create: (context) => ProfileBloc(
-              profileRepository: context.read<ProfileRepository>(),
-            ),
           ),
           BlocProvider<ThemeBloc>(
             create: (context) => ThemeBloc(),

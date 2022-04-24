@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:news_app_with_firebase/blocs/blocs.dart';
 import 'package:news_app_with_firebase/models/user_custom_error.dart';
 import 'package:news_app_with_firebase/models/news.dart';
 import 'package:news_app_with_firebase/repositories/news_repository.dart';
@@ -13,10 +14,19 @@ part 'active_category_state.dart';
 class ActiveCategoryBloc
     extends Bloc<ActiveCategoryEvent, ActiveCategoryState> {
   final NewsRepository newsRepository;
+  late StreamSubscription signinSubscription;
+
+  final SigninCubit signinCubit;
 
   ActiveCategoryBloc({
     required this.newsRepository,
+    required this.signinCubit,
   }) : super(ActiveCategoryState.initial()) {
+    signinSubscription = signinCubit.stream.listen((SigninState signinState) {
+      if (signinState.signinStatus == SigninStatus.success) {
+        add(FetchInitialNewsEvent());
+      }
+    });
     on<FetchInitialNewsEvent>(_fetchInitialNews);
     on<FetchNewsCategoryEvent>(_fetchNewsCategory);
     on<RefreshNewsEvent>(_refreshNews);
@@ -175,5 +185,11 @@ class ActiveCategoryBloc
       emit(state.copyWith(
           loadingStatus: NewsLoadingStatus.error, customError: e));
     }
+  }
+
+  @override
+  Future<void> close() {
+    signinSubscription.cancel();
+    return super.close();
   }
 }
