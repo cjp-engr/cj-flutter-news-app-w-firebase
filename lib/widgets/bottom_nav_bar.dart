@@ -11,7 +11,6 @@ import 'package:news_app_with_firebase/pages/saved_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   static const String routeName = '/bottomnav';
-  final int _page = 2;
   static const List<Widget> _widgetOptions = <Widget>[
     SavedPage(),
     SearchNewsPage(),
@@ -25,10 +24,11 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentIndex = context.watch<BottomNavBarBloc>().state.currentIndex;
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        index: _page,
+        index: currentIndex,
         height: 75.0,
         items: <Widget>[
           Icon(
@@ -72,11 +72,7 @@ class BottomNavBar extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            BlocBuilder<BottomNavBarBloc, BottomNavBarState>(
-              builder: (context, state) {
-                return _widgetOptions[state.currentIndex];
-              },
-            )
+            _widgetOptions[currentIndex],
           ],
         ),
       ),

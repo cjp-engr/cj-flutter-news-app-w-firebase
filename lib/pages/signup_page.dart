@@ -38,7 +38,6 @@ class _SignupPageState extends State<SignupPage> {
           email: _email!,
           password: _password!,
         );
-    context.read<BottomNavBarBloc>().add(const SetPageEvent(index: 2));
   }
 
   @override

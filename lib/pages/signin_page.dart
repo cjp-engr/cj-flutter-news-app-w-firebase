@@ -33,7 +33,6 @@ class _SigninPageState extends State<SigninPage> {
     //print('email: $_email, password: $_password');
 
     context.read<SigninCubit>().signin(email: _email!, password: _password!);
-    context.read<BottomNavBarBloc>().add(const SetPageEvent(index: 2));
   }
 
   @override

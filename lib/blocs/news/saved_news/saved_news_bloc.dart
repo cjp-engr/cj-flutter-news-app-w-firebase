@@ -122,4 +122,10 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
       ));
     }
   }
+
+  @override
+  Future<void> close() {
+    bottomNavBarSubscription.cancel();
+    return super.close();
+  }
 }

@@ -30,10 +30,16 @@ class _ProfilePageState extends State<ProfilePage> {
       child: BlocBuilder<ProfileBloc, ProfileState>(
         builder: (context, state) {
           if (state.profileStatus == ProfileStatus.initial) {
-            return const Text('Walang laman');
+            return _profileScreen(
+              '...',
+              '...',
+              'https://picsum.photos/300',
+            );
           } else if (state.profileStatus == ProfileStatus.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return _profileScreen(
+              'Loading name...',
+              'Loading email...',
+              'https://picsum.photos/300',
             );
           } else if (state.profileStatus == ProfileStatus.error) {
             return Center(
@@ -60,23 +66,31 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             );
           }
-          return Stack(
-            children: [
-              _backgroundImage(state.user.profileImage),
-              _userInfoContainer(context),
-              _userAvatarImage(
-                context,
-                state.user.profileImage,
-              ),
-              _userInfo(
-                context,
-                state.user.name,
-                state.user.email,
-              ),
-            ],
+          return _profileScreen(
+            state.user.name,
+            state.user.email,
+            state.user.profileImage,
           );
         },
       ),
+    );
+  }
+
+  Widget _profileScreen(String name, String email, String profileImage) {
+    return Stack(
+      children: [
+        _backgroundImage(profileImage),
+        _userInfoContainer(context),
+        _userAvatarImage(
+          context,
+          profileImage,
+        ),
+        _userInfo(
+          context,
+          name,
+          email,
+        ),
+      ],
     );
   }
 

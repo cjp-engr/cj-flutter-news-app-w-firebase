@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
               savedNewsRepository:
                   RepositoryProvider.of<SavedNewsRepository>(context),
               bottomNavBarBloc: BlocProvider.of<BottomNavBarBloc>(context),
-            ),
+            )..add(FetchSavedNewsEvent()),
           ),
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(
