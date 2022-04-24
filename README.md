@@ -1,6 +1,6 @@
 # News app with Firebase
 
-This application can display the news by category and search and can saved news for future reading. Other feature includes weather application which user can see the current weather condition by searching the city.
+This application can display the news by category and search and can save news for future reading. Other feature includes weather application which user can see the current weather condition by searching the city.
 
 **Dependencies used: **
 <br />
